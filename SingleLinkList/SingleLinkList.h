@@ -3,7 +3,7 @@
 #define _SINGLE_LINK_LIST_
 
     #define SUCCESS 1
-    #define FAIL    2
+    #define FAIL    0
 
     typedef unsigned char bool;
 
