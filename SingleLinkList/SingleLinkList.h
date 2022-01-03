@@ -5,6 +5,9 @@
     #define SUCCESS 1
     #define FAIL    0
 
+    #define FREE(X) free(X);    \
+                    X = NULL;   \
+
     typedef unsigned char bool;
 
     typedef struct _single_link_list_
@@ -33,8 +36,8 @@
     void print_single_link_list         (SINGLE_LINK * headPtr);
 
     bool arrange_in_order           (ARRANGE_ORDER order, SINGLE_LINK ** headPtr);
-    bool swap_with_data             (SINGLE_LINK * singlePtr1, SINGLE_LINK * singlePtr2);
-    bool swap_with_address          (); // TODO: Argument will be decided once logic will decided 
+    bool swap_with_data             (SINGLE_LINK ** headPtr, int data1, int data2);
+    bool swap_with_address          (SINGLE_LINK ** headPtr, int data1, int data2);
     
     bool delete_single_node         (SINGLE_LINK ** headPtr, int data);
     bool delete_single_node_r       (SINGLE_LINK ** headPtr, int data);     // _r Indicate recursion
