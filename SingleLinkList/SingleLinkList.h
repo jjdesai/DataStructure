@@ -25,7 +25,7 @@
 
     bool add_single_link_at_last        (SINGLE_LINK ** headPtr, int data);
     bool add_single_link_at_first       (SINGLE_LINK ** headPtr, int data);
-    bool add_single_link_at_pos         (SINGLE_LINK ** headPtr, int data);
+    bool add_single_link_at_pos         (SINGLE_LINK ** headPtr, int data, unsigned int position);
     bool add_single_link_with_ascending (SINGLE_LINK ** heardPtr, int data);
     
     void print_single_link_with_data    (SINGLE_LINK * headPtr);
