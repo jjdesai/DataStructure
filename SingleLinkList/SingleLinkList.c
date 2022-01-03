@@ -78,7 +78,7 @@ void print_single_link_with_addr (SINGLE_LINK * headPtr)
     printf(" Single Link List (Addr) : ");
     while(currentNodePtr)
     {
-        printf("%.3p-->", (void *) currentNodePtr);
+        printf("%p-->", (void *) currentNodePtr);
         currentNodePtr = currentNodePtr->next;
     }
     printf("NULL\n");
