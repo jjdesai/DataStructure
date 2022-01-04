@@ -20,19 +20,13 @@ void main()
 
     print_single_link_list(headPtr);
 
-    delete_single_node(&headPtr, 55);
-    print_single_link_list(headPtr);
-    delete_single_node(&headPtr, 30);
-    print_single_link_list(headPtr);
-    delete_single_node(&headPtr, 88);
-    print_single_link_list(headPtr);
-    delete_single_node(&headPtr, 100);
-    print_single_link_list(headPtr);
-    delete_single_node(&headPtr, 10);
+    SINGLE_LINK * da = reverse_single_link_r(&headPtr, headPtr);
+    printf(" After Reverse : [%d]\n", da->data);
 
     print_single_link_list(headPtr);
 
-    delete_single_link_list(&headPtr);
+    delete_single_link_list_r(&headPtr);
+    printf(" After Delete \n");
 
     print_single_link_list(headPtr);
 
@@ -124,15 +118,12 @@ bool add_single_link_at_pos (SINGLE_LINK ** headPtr, int data, unsigned int posi
             {
                 newNodePtr->next = (* headPtr);
                 (*headPtr) = newNodePtr;
-                printf(" Added [%d]\n", newNodePtr->data);
                 return SUCCESS;
             }
             else
             {
                 SINGLE_LINK * currentNodePtr = (*headPtr);
                 SINGLE_LINK * prevOfCurrentNodePtr = NULL;
-
-                printf(" Before : Pos[%d] Data[%d]\n", position, data);
 
                 position--;
                 while (position && currentNodePtr)
@@ -141,7 +132,6 @@ bool add_single_link_at_pos (SINGLE_LINK ** headPtr, int data, unsigned int posi
                     currentNodePtr = currentNodePtr->next; 
                     position--;
                 }
-                printf(" After : Pos[%d]\n", position);
 
                 if(0 == position) {
                     prevOfCurrentNodePtr->next = newNodePtr;
@@ -149,8 +139,7 @@ bool add_single_link_at_pos (SINGLE_LINK ** headPtr, int data, unsigned int posi
                     return SUCCESS;
                 }
                 else {
-                    printf(" Deleted with Add [%d]\n", newNodePtr->data);
-                    FREE(newNodePtr);
+                    FREE_SINGLE_LINK_NODE(newNodePtr);
                     return FAIL;
                 }
             }
@@ -229,13 +218,26 @@ bool delete_single_link_list (SINGLE_LINK ** headPtr)
         {
             currentNodePtr = *headPtr;
             (*headPtr) = (*headPtr)->next;
-            free(currentNodePtr);
-            currentNodePtr = NULL;
+            FREE_SINGLE_LINK_NODE(currentNodePtr);
         }
         return SUCCESS;
     }
     else {
         printf(" HeadPtr is empty\n");
+        return FAIL;
+    }
+}
+
+bool delete_single_link_list_r (SINGLE_LINK ** headPtr)    // _r Indicate recursion
+{
+    if(headPtr) {
+        while(*headPtr) {
+            delete_single_link_list_r(&(*headPtr)->next);
+            FREE_SINGLE_LINK_NODE(*headPtr);
+        }
+        return SUCCESS;
+    }
+    else {
         return FAIL;
     }
 }
@@ -255,13 +257,13 @@ bool delete_single_node (SINGLE_LINK ** headPtr, int data)
         // Very First Node itself
         if(!prevOfCurrentNodePtr && (*headPtr == currentNodePtr)) {
             *headPtr = (*headPtr)->next;
-            FREE(currentNodePtr);
+            FREE_SINGLE_LINK_NODE(currentNodePtr);
             return SUCCESS;
         }
         // If currentNodePtr is NULL, then there is no desired node present in linked list
         else if(currentNodePtr) {
             prevOfCurrentNodePtr->next = currentNodePtr->next;
-            FREE(currentNodePtr);
+            FREE_SINGLE_LINK_NODE(currentNodePtr);
             return SUCCESS;
         }
         // We did not found desired node in linked list
@@ -275,5 +277,47 @@ bool delete_single_node (SINGLE_LINK ** headPtr, int data)
     }
 }
 // bool delete_single_node_r       (SINGLE_LINK ** headPtr, int data);     // _r Indicate recursion
-// bool delete_single_link_list    (SINGLE_LINK ** headPtr);
-// bool delete_single_link_list_r  (SINGLE_LINK ** headPtr);               // _r Indicate recursion
+
+bool reverse_single_link (SINGLE_LINK ** headPtr)
+{
+    if(headPtr) {
+
+        SINGLE_LINK * prevNodePtr = NULL, * currentNodePtr = (*headPtr), * tmpNextNodePtr = NULL;
+       
+        while(currentNodePtr) {
+
+            tmpNextNodePtr = currentNodePtr->next;
+            currentNodePtr->next = prevNodePtr;
+            prevNodePtr = currentNodePtr;
+            currentNodePtr = tmpNextNodePtr;
+        }
+        (*headPtr) = prevNodePtr;
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
+}
+
+// Return the last node which was first node before this operation
+SINGLE_LINK * reverse_single_link_r (SINGLE_LINK ** headPtr, SINGLE_LINK * nodePtr)
+{
+    if(headPtr) {  
+        if(nodePtr == NULL) {
+            return NULL;
+        }
+        // To Assign headPtr with last node, as we're making it as first
+        if(nodePtr->next == NULL) {
+            (*headPtr) = nodePtr;
+            return nodePtr;
+        }
+        SINGLE_LINK * nextNodePtr = reverse_single_link_r(headPtr, nodePtr->next);
+        nextNodePtr->next = nodePtr;
+        // To Assign NULL to first node's next, as we're making it as last
+        nodePtr->next = NULL;
+        return nodePtr;
+    }
+    else {
+        return NULL;
+    }
+}

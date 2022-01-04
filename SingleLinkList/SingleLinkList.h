@@ -5,8 +5,8 @@
     #define SUCCESS 1
     #define FAIL    0
 
-    #define FREE(X) free(X);    \
-                    X = NULL;   \
+    #define FREE_SINGLE_LINK_NODE(VAR)  free(VAR);    \
+                                        VAR = NULL;   \
 
     typedef unsigned char bool;
 
@@ -35,13 +35,16 @@
     void print_single_link_with_addr    (SINGLE_LINK * headPtr);
     void print_single_link_list         (SINGLE_LINK * headPtr);
 
-    bool arrange_in_order           (ARRANGE_ORDER order, SINGLE_LINK ** headPtr);
-    bool swap_with_data             (SINGLE_LINK ** headPtr, int data1, int data2);
-    bool swap_with_address          (SINGLE_LINK ** headPtr, int data1, int data2);
+    bool arrange_in_order               (ARRANGE_ORDER order, SINGLE_LINK ** headPtr);
+    bool swap_with_data                 (SINGLE_LINK ** headPtr, int data1, int data2);
+    bool swap_with_address              (SINGLE_LINK ** headPtr, int data1, int data2);
     
-    bool delete_single_node         (SINGLE_LINK ** headPtr, int data);
-    bool delete_single_node_r       (SINGLE_LINK ** headPtr, int data);     // _r Indicate recursion
-    bool delete_single_link_list    (SINGLE_LINK ** headPtr);
-    bool delete_single_link_list_r  (SINGLE_LINK ** headPtr);               // _r Indicate recursion
+    bool delete_single_node             (SINGLE_LINK ** headPtr, int data);
+    bool delete_single_node_r           (SINGLE_LINK ** headPtr, int data);     // _r Indicate recursion
+    bool delete_single_link_list        (SINGLE_LINK ** headPtr);
+    bool delete_single_link_list_r      (SINGLE_LINK ** headPtr);               // _r Indicate recursion
+
+    bool reverse_single_link            (SINGLE_LINK ** headPtr);
+    SINGLE_LINK * reverse_single_link_r (SINGLE_LINK ** headPtr, SINGLE_LINK * nodePtr); // _r Indicate recursion
 
 #endif  // _SINGLE_LINK_LIST_
