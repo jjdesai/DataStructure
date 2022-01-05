@@ -35,8 +35,8 @@
     void print_single_link_with_addr    (SINGLE_LINK * headPtr);
     void print_single_link_list         (SINGLE_LINK * headPtr);
 
-    bool arrange_in_order               (ARRANGE_ORDER order, SINGLE_LINK ** headPtr);
-    bool swap_with_data                 (SINGLE_LINK ** headPtr, int data1, int data2);
+    bool arrange_in_order               (ARRANGE_ORDER order, SINGLE_LINK * headPtr);
+    bool swap_with_data                 (SINGLE_LINK * ptr1, SINGLE_LINK * ptr2);
     bool swap_with_address              (SINGLE_LINK ** headPtr, int data1, int data2);
     
     bool delete_single_node             (SINGLE_LINK ** headPtr, int data);

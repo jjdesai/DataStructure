@@ -20,16 +20,18 @@ void main()
 
     print_single_link_list(headPtr);
 
-    SINGLE_LINK * da = reverse_single_link_r(&headPtr, headPtr);
-    printf(" After Reverse : [%d]\n", da->data);
+    arrange_in_order(ARRANGE_IN_ASCENDING, headPtr);
+    printf(" After ARRANGE_IN_ASCENDING\n");
+    print_single_link_list(headPtr);
 
+    arrange_in_order(ARRANGE_IN_DESCENDING, headPtr);
+    printf(" After ARRANGE_IN_DESCENDING\n");
     print_single_link_list(headPtr);
 
     delete_single_link_list_r(&headPtr);
     printf(" After Delete \n");
 
     print_single_link_list(headPtr);
-
 }
 
 SINGLE_LINK * create_new_node (int data)
@@ -208,6 +210,51 @@ void print_single_link_list (SINGLE_LINK * headPtr)
 {
     SINGLE_LINK * currentNodePtr = headPtr;
     print_single_link_with_data(currentNodePtr);
+}
+
+bool arrange_in_order(ARRANGE_ORDER order, SINGLE_LINK * headPtr)
+{
+    if(headPtr) {
+        SINGLE_LINK * innerLoopPtr = NULL;
+        SINGLE_LINK * outterLoopPtr = NULL;
+        for(outterLoopPtr=headPtr; outterLoopPtr->next; outterLoopPtr=outterLoopPtr->next)
+        {
+            for(innerLoopPtr=outterLoopPtr->next; innerLoopPtr; innerLoopPtr=innerLoopPtr->next)
+            {
+                if(ARRANGE_IN_ASCENDING == order)
+                {
+                    if(innerLoopPtr->data < outterLoopPtr->data)
+                    {
+                        swap_with_data(innerLoopPtr, outterLoopPtr);
+                    }
+                }
+                else if(ARRANGE_IN_DESCENDING == order)
+                {
+                    if(innerLoopPtr->data > outterLoopPtr->data)
+                    {
+                        swap_with_data(innerLoopPtr, outterLoopPtr);
+                    }
+                }
+            }
+        }
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
+}
+
+bool swap_with_data(SINGLE_LINK * ptr1, SINGLE_LINK * ptr2)
+{
+    if(ptr1 && ptr2) {
+        int temp = ptr1->data;
+        ptr1->data = ptr2->data;
+        ptr2->data = temp;
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
 }
 
 bool delete_single_link_list (SINGLE_LINK ** headPtr)
