@@ -5,6 +5,9 @@
     #define SUCCESS 1
     #define FAIL    0
 
+    #define YES     1
+    #define NO      0
+
     #define FREE_SINGLE_LINK_NODE(VAR)  free(VAR);    \
                                         VAR = NULL;
 
@@ -45,5 +48,9 @@
 
     bool reverse_single_link            (SINGLE_LINK ** headPtr);
     SINGLE_LINK * reverse_single_link_r (SINGLE_LINK ** headPtr, SINGLE_LINK * nodePtr); // _r Indicate recursion
+
+    bool is_single_link_empty           (SINGLE_LINK * headPtr);
+    unsigned int size_of_single_link    (SINGLE_LINK * headPtr);
+    SINGLE_LINK * add_two_single_link   (SINGLE_LINK * headPtr1, SINGLE_LINK * headPtr2); 
 
 #endif  // _SINGLE_LINK_LIST_

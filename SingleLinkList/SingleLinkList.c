@@ -361,3 +361,55 @@ SINGLE_LINK * reverse_single_link_r (SINGLE_LINK ** headPtr, SINGLE_LINK * nodeP
         return NULL;
     }
 }
+
+bool is_single_link_empty (SINGLE_LINK * headPtr)
+{
+    return (headPtr) ? NO : YES; 
+}
+
+unsigned int size_of_single_link (SINGLE_LINK * headPtr)
+{
+    unsigned int count = 0;
+    while(headPtr) {
+        headPtr = headPtr->next;
+        count += 1;
+    }
+    return count;
+}
+
+SINGLE_LINK * add_two_single_link (SINGLE_LINK * headPtr1, SINGLE_LINK * headPtr2)
+{
+    if(headPtr1 && headPtr2) {
+        SINGLE_LINK * newLinkListHeadPtr = create_new_node(0);
+        SINGLE_LINK * currentSinglePtr = newLinkListHeadPtr;
+        SINGLE_LINK * newSinglePtr = NULL;
+        int data1, data2 = 0;
+        int carry = 0;
+        int sum = 0;
+
+        while(headPtr1 || headPtr2) {
+            sum =   ((headPtr1) ? headPtr1->data : 0) +
+                    ((headPtr2) ? headPtr2->data : 0) +
+                    carry;
+
+            newSinglePtr = create_new_node((sum%10));
+            currentSinglePtr->next = newSinglePtr;
+            currentSinglePtr = currentSinglePtr->next;
+
+            carry = (sum%10);
+
+            headPtr1 = ((headPtr1) ? (headPtr1->next) : NULL);
+            headPtr2 = ((headPtr2) ? (headPtr2->next) : NULL);
+        }
+        if(carry) {
+            currentSinglePtr->next = create_new_node(carry);
+        }
+
+        currentSinglePtr = newLinkListHeadPtr->next;
+        FREE_SINGLE_LINK_NODE(newLinkListHeadPtr);
+        return currentSinglePtr;
+    }
+    else {
+        return NULL;
+    }
+}

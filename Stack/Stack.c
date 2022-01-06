@@ -40,14 +40,14 @@ STACK * create_new_stock (int data)
     return newStackPtr;
 }
 
-bool is_stack_empty (STACK * headPtr)
+bool is_stack_empty (STACK * headStackPtr)
 {
-    return (headPtr) ? TRUE : FALSE;
+    return (headStackPtr) ? TRUE : FALSE;
 }
 
-unsigned int stack_size (STACK * headPtr)
+unsigned int stack_size (STACK * headStackPtr)
 {
-    STACK * currentStackPtr = headPtr;
+    STACK * currentStackPtr = headStackPtr;
     int count = 0;
     while(currentStackPtr) {
         currentStackPtr = currentStackPtr->next;
@@ -56,18 +56,18 @@ unsigned int stack_size (STACK * headPtr)
     return count;
 }
 
-int top_from_stack (STACK * headPtr)
+int top_from_stack (STACK * headStackPtr)
 {
-    return (headPtr) ? (headPtr->data) : (-1);
+    return (headStackPtr) ? (headStackPtr->data) : (-1);
 }
 
-bool push_in_stack (STACK ** headPtr, int data)
+bool push_in_stack (STACK ** headStackPtr, int data)
 {
-    if(headPtr) {
+    if(headStackPtr) {
         STACK * newStackPtr = create_new_stock(data);
         if(newStackPtr) {
-            newStackPtr->next = (*headPtr);
-            (*headPtr) = newStackPtr;
+            newStackPtr->next = (*headStackPtr);
+            (*headStackPtr) = newStackPtr;
             return SUCCESS;
         }
         else {
@@ -80,13 +80,14 @@ bool push_in_stack (STACK ** headPtr, int data)
     }
 }
 
-bool pop_from_stack (STACK ** headPtr, int * poppedDataPtr)
+bool pop_from_stack (STACK ** headStackPtr, int * poppedDataPtr)
 {
-    if(headPtr && *headPtr && *poppedDataPtr) {
+    if(headStackPtr && *headStackPtr && *poppedDataPtr) {
 
-        STACK * tempStackPtr = (*headPtr);
+        STACK * tempStackPtr = (*headStackPtr);
+        (*headStackPtr) = tempStackPtr->data;
+        (*headStackPtr) = (*headStackPtr)->next;
         (*poppedDataPtr) = tempStackPtr->data;
-        (*headPtr) = (*headPtr)->next;
         FREE_STACK(tempStackPtr);
         return SUCCESS;
     }
@@ -95,12 +96,14 @@ bool pop_from_stack (STACK ** headPtr, int * poppedDataPtr)
     }
 }
 
-bool swap_stack (STACK ** ptr1, STACK ** ptr2)
+bool swap_stack (STACK ** headStackPtr1, STACK ** headStackPtr2)
 {
-    if((ptr1 && *ptr1) && (ptr2 && *ptr2)) {
-        STACK * tempStackPtr = (*ptr1);
-        (*ptr1) = (*ptr2);
-        (*ptr2) = tempStackPtr;
+    if( (headStackPtr1 && *headStackPtr1) &&
+        (headStackPtr2 && *headStackPtr2)) {
+        
+        STACK * tempStackPtr = (*headStackPtr1);
+        (*headStackPtr1) = (*headStackPtr2);
+        (*headStackPtr2) = tempStackPtr;
         return SUCCESS;
     }
     else {
@@ -108,12 +111,12 @@ bool swap_stack (STACK ** ptr1, STACK ** ptr2)
     }
 }
 
-void print_stack (STACK * headPtr)
+void print_stack (STACK * headStackPtr)
 {
     printf(" Stack : ");
-    while(headPtr) {
-        printf("%d-->", headPtr->data);
-        headPtr = headPtr->next;
+    while(headStackPtr) {
+        printf("%d-->", headStackPtr->data);
+        headStackPtr = headStackPtr->next;
     }
     printf("NULL\n");
 }
