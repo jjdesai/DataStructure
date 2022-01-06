@@ -174,7 +174,7 @@ bool add_single_link_with_ascending (SINGLE_LINK ** heardPtr, int data)
             newNodePtr->next = currentNodePtr->next;
             currentNodePtr->next = newNodePtr;
         }
-
+        return SUCCESS;
     }
     else {
         return FAIL;
@@ -216,21 +216,15 @@ bool arrange_in_order(ARRANGE_ORDER order, SINGLE_LINK * headPtr)
     if(headPtr) {
         SINGLE_LINK * innerLoopPtr = NULL;
         SINGLE_LINK * outterLoopPtr = NULL;
-        for(outterLoopPtr=headPtr; outterLoopPtr->next; outterLoopPtr=outterLoopPtr->next)
-        {
-            for(innerLoopPtr=outterLoopPtr->next; innerLoopPtr; innerLoopPtr=innerLoopPtr->next)
-            {
-                if(ARRANGE_IN_ASCENDING == order)
-                {
-                    if(innerLoopPtr->data < outterLoopPtr->data)
-                    {
+        for(outterLoopPtr=headPtr; outterLoopPtr->next; outterLoopPtr=outterLoopPtr->next) {
+            for(innerLoopPtr=outterLoopPtr->next; innerLoopPtr; innerLoopPtr=innerLoopPtr->next) {
+                if(ARRANGE_IN_ASCENDING == order) {
+                    if(innerLoopPtr->data < outterLoopPtr->data) {
                         swap_with_data(innerLoopPtr, outterLoopPtr);
                     }
                 }
-                else if(ARRANGE_IN_DESCENDING == order)
-                {
-                    if(innerLoopPtr->data > outterLoopPtr->data)
-                    {
+                else if(ARRANGE_IN_DESCENDING == order) {
+                    if(innerLoopPtr->data > outterLoopPtr->data) {
                         swap_with_data(innerLoopPtr, outterLoopPtr);
                     }
                 }
