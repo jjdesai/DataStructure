@@ -6,7 +6,7 @@
     #define FAIL    0
 
     #define FREE_SINGLE_LINK_NODE(VAR)  free(VAR);    \
-                                        VAR = NULL;   \
+                                        VAR = NULL;
 
     typedef unsigned char bool;
 
@@ -37,7 +37,6 @@
 
     bool arrange_in_order               (ARRANGE_ORDER order, SINGLE_LINK * headPtr);
     bool swap_with_data                 (SINGLE_LINK * ptr1, SINGLE_LINK * ptr2);
-    bool swap_with_address              (SINGLE_LINK ** headPtr, int data1, int data2);
     
     bool delete_single_node             (SINGLE_LINK ** headPtr, int data);
     bool delete_single_node_r           (SINGLE_LINK ** headPtr, int data);     // _r Indicate recursion

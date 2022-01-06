@@ -183,12 +183,11 @@ bool add_single_link_with_ascending (SINGLE_LINK ** heardPtr, int data)
 
 void print_single_link_with_data (SINGLE_LINK * headPtr)
 {
-    SINGLE_LINK * currentNodePtr = headPtr;
     printf(" Single Link List (data) : ");
-    while(currentNodePtr)
+    while(headPtr)
     {
-        printf("%d-->", currentNodePtr->data);
-        currentNodePtr = currentNodePtr->next;
+        printf("%d-->", headPtr->data);
+        headPtr = headPtr->next;
     }
     printf("NULL\n");
     //print_single_link_with_addr(headPtr);
