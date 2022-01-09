@@ -33,14 +33,14 @@ STACK * create_stack (int data)
 bool EnQueue (STACK ** headPtr, STACK * newStackPtr)
 {
     if(headPtr && newStackPtr) {
-        if((NULL) == (*headPtr)) {
+        newStackPtr->next = NULL;
+        if(NULL == (*headPtr)) {
             (*headPtr) = newStackPtr;
         }
         else {
             STACK * currentStackPtr = *headPtr;
             while(currentStackPtr->next) {
                 currentStackPtr = currentStackPtr->next;
-                printf(" assa..[%d]", newStackPtr->data);
             }
             currentStackPtr->next = newStackPtr;
         }
@@ -71,15 +71,11 @@ bool Push (STACK ** firstQueuePtr, int data)
 
             STACK * secondQueuePtr = NULL;
 
-            while(EnQueue(&secondQueuePtr, DeQueue(firstQueuePtr))){
-                printf(" BINI-1...");
-            }
+            while(EnQueue(&secondQueuePtr, DeQueue(firstQueuePtr)));   
 
             EnQueue(firstQueuePtr, newStackPtr);
 
-            while(EnQueue(firstQueuePtr, DeQueue(&secondQueuePtr))){
-                printf(" INfi...");
-            }
+            while(EnQueue(firstQueuePtr, DeQueue(&secondQueuePtr)));
 
             return SUCCESS;
         }
