@@ -8,16 +8,15 @@ void main (void)
 {
     STACK * headPtr = NULL;
 	
-	Push(&headPtr, 2);
-	Push(&headPtr, 3);
-	PrintStack(headPtr);
-	Push(&headPtr, 4);
-	Push(&headPtr, 6);
-	PrintStack(headPtr);
-	Pop(&headPtr);
-	Push(&headPtr,10);
-	PrintStack(headPtr);
-    
+	push(&headPtr, 2);
+	push(&headPtr, 3);
+	print_stack(headPtr);
+	push(&headPtr, 4);
+	push(&headPtr, 6);
+	print_stack(headPtr);
+	pop(&headPtr);
+	push(&headPtr,10);
+	print_stack(headPtr);
 }
 
 STACK * create_stack (int data)
@@ -30,7 +29,7 @@ STACK * create_stack (int data)
     return newStackPtr;
 }
 
-bool EnQueue (STACK ** headPtr, STACK * newStackPtr)
+bool enqueue (STACK ** headPtr, STACK * newStackPtr)
 {
     if(headPtr && newStackPtr) {
         newStackPtr->next = NULL;
@@ -51,7 +50,7 @@ bool EnQueue (STACK ** headPtr, STACK * newStackPtr)
     }
 }
 
-STACK * DeQueue (STACK ** stackHeadPtr)
+STACK * dequeue (STACK ** stackHeadPtr)
 {
     if(stackHeadPtr && (*stackHeadPtr)) {
         STACK * tempStackPtr = (*stackHeadPtr);
@@ -63,7 +62,7 @@ STACK * DeQueue (STACK ** stackHeadPtr)
     }
 }
 
-bool Push (STACK ** firstQueuePtr, int data)
+bool push (STACK ** firstQueuePtr, int data)
 {
     if(firstQueuePtr) {
         STACK * newStackPtr = create_stack(data);
@@ -71,11 +70,11 @@ bool Push (STACK ** firstQueuePtr, int data)
 
             STACK * secondQueuePtr = NULL;
 
-            while(EnQueue(&secondQueuePtr, DeQueue(firstQueuePtr)));   
+            while(enqueue(&secondQueuePtr, dequeue(firstQueuePtr)));   
 
-            EnQueue(firstQueuePtr, newStackPtr);
+            enqueue(firstQueuePtr, newStackPtr);
 
-            while(EnQueue(firstQueuePtr, DeQueue(&secondQueuePtr)));
+            while(enqueue(firstQueuePtr, dequeue(&secondQueuePtr)));
 
             return SUCCESS;
         }
@@ -89,7 +88,7 @@ bool Push (STACK ** firstQueuePtr, int data)
     }
 }
 
-int Pop (STACK ** headPtr)
+int pop (STACK ** headPtr)
 {
     int data = 0;
     if(headPtr) {
@@ -103,7 +102,7 @@ int Pop (STACK ** headPtr)
     return data;
 }
 
-void PrintStack (STACK * stackHeadPtr)
+void print_stack (STACK * stackHeadPtr)
 {
     printf(" Stack : ");
     while (stackHeadPtr) {

@@ -17,10 +17,11 @@
     }STACK;
 
     STACK * create_stack    (int data);
-    bool EnQueue             (STACK ** headPtr, STACK * newStackPtr);
-    STACK * DeQueue         (STACK ** headPtr);
-    bool Push               (STACK ** headPtr, int data);
-    int Pop                 (STACK ** headPtr);
-    void PrintStack         (STACK * tmpPtr);
+    bool enqueue            (STACK ** stackHeadPtr, STACK * newStackPtr);
+    STACK * dequeue         (STACK ** stackHeadPtr);
+    bool push               (STACK ** stackHeadPtr, int data);
+    int pop                 (STACK ** stackHeadPtr);
+    void print_stack        (STACK * stackHeadPtr);
+    bool delete_stack       (STACK ** stackHeadPtr);
 
 #endif // _STACK_USING_QUEUE_
