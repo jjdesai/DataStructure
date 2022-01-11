@@ -116,3 +116,20 @@ void print_queue (QUEUE * headQueuePtr)
     }
     printf("NULL\n");
 }
+
+bool clear_queue (QUEUE ** queueHeadPtr)
+{
+    if(queueHeadPtr) {
+        
+        QUEUE * tempStackPtr = NULL;
+        while(*queueHeadPtr) {
+            tempStackPtr = (*queueHeadPtr);
+            FREE_QUEUE(tempStackPtr);
+            (*queueHeadPtr) = (*queueHeadPtr)->next;
+        }
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
+}

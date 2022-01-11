@@ -4,6 +4,9 @@
     #define SUCCESS 1
     #define FAIL    0
 
+    #define FREE_STACK(VAR) free(VAR);  \
+                            VAR = NULL;
+
     #define YES 1
     #define NO  0
 
@@ -22,6 +25,6 @@
     bool push               (STACK ** stackHeadPtr, int data);
     int pop                 (STACK ** stackHeadPtr);
     void print_stack        (STACK * stackHeadPtr);
-    bool delete_stack       (STACK ** stackHeadPtr);
+    bool clear_stack       (STACK ** stackHeadPtr);
 
 #endif // _STACK_USING_QUEUE_

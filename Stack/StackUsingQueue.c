@@ -95,6 +95,7 @@ int pop (STACK ** headPtr)
         STACK * tmpPtr = DeQueue(headPtr);
         if(tmpPtr) {
             data = tmpPtr->data;
+            FREE_STACK(tmpPtr);
             free(tmpPtr);
             tmpPtr = NULL;
         }
@@ -110,5 +111,21 @@ void print_stack (STACK * stackHeadPtr)
         stackHeadPtr = stackHeadPtr->next;
     }
     printf("NULL\n");
-    
+}
+
+bool clear_stack (STACK ** stackHeadPtr)
+{
+    if(stackHeadPtr) {
+
+        STACK * tempStackPtr = NULL;
+        while(*stackHeadPtr) {
+            tempStackPtr = (*stackHeadPtr);
+            FREE_STACK(tempStackPtr);
+            (*stackHeadPtr) = (*stackHeadPtr)->next;
+        }
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
 }
