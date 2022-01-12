@@ -19,7 +19,7 @@ void print_stack (QUEUE * queueHeadPtr)
     printf("NULL\n");
 }
 
-bool clear_stack (QUEUE ** queueHeadPtr)
+bool clear_queue (QUEUE ** queueHeadPtr)
 {
     if(queueHeadPtr) {
 
@@ -29,6 +29,18 @@ bool clear_stack (QUEUE ** queueHeadPtr)
             FREE_STACK(tempQueuePtr);
             (*queueHeadPtr) = (*queueHeadPtr)->next;
         }
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
+}
+
+bool clear_queue_r (QUEUE ** queueHeadPtr)
+{
+    if(*queueHeadPtr) {
+        clear_queue_r(&(*queueHeadPtr)->next);
+        FREE_QUEUE(*queueHeadPtr);
         return SUCCESS;
     }
     else {

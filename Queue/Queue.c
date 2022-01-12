@@ -133,3 +133,15 @@ bool clear_queue (QUEUE ** queueHeadPtr)
         return FAIL;
     }
 }
+
+bool clear_queue_r (QUEUE ** queueHeadPtr)
+{
+    if(*queueHeadPtr) {
+        clear_queue_r(&(*queueHeadPtr)->next);
+        FREE_QUEUE(*queueHeadPtr);
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
+}

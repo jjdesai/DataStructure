@@ -7,6 +7,9 @@
     #define TRUE    1
     #define FALSE   0
 
+    #define FREE_QUEUE(VAR) free(VAR);  \
+                            VAR = NULL;
+
     typedef unsigned char bool;
 
     typedef struct _queue_
@@ -22,6 +25,7 @@
     int dequeue     (QUEUE ** queueHeadPtr);
     
     void print_queue    (QUEUE * queueHeadPtr);
-    bool clear_queue    (QUEUE ** queueHeadPtr);    
+    bool clear_queue    (QUEUE ** queueHeadPtr);
+    bool clear_queue_r  (QUEUE ** queueHeadPtr);
 
 #endif // QUEUE_USING_STACK

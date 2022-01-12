@@ -33,5 +33,6 @@
     bool swap_queues            (QUEUE ** headQueuePtr1, QUEUE ** headQueuePtr2);
     void print_queue            (QUEUE * headQueuePtr);
     bool clear_queue            (QUEUE ** headQueuePtr);
+    bool clear_queue_r          (QUEUE ** queueHeadPtr);
     
 #endif  // _QUEUE_
