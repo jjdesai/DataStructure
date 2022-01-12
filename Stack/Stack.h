@@ -22,16 +22,17 @@
 
     STACK * create_new_stock (int data);
     
-    bool is_stack_empty     (STACK * headStackPtr);
-    unsigned int stack_size (STACK * headStackPtr);
+    bool is_stack_empty     (STACK * stackHeadPtr);
+    unsigned int stack_size (STACK * stackHeadPtr);
     
-    int top_from_stack      (STACK * headStackPtr);
-    bool push_in_stack      (STACK ** headStackPtr, int data);
-    bool pop_from_stack     (STACK ** headStackPtr, int * poppedDataPtr);
+    int top_from_stack      (STACK * stackHeadPtr);
+    bool push_in_stack      (STACK ** stackHeadPtr, int data);
+    bool pop_from_stack     (STACK ** stackHeadPtr, int * poppedDataPtr);
     
-    bool swap_stack         (STACK ** headStackPtr1, STACK ** headStackPtr2);
+    bool swap_stack         (STACK ** stackHeadPtr1, STACK ** stackHeadPtr2);
     
-    void print_stack        (STACK * headStackPtr);
-    
+    void print_stack        (STACK * stackHeadPtr);
+    bool clear_stack        (STACK ** stackHeadPtr);
+    bool clear_stack_r      (STACK ** stackHeadPtr);
 
 #endif  // _STACK_

@@ -29,15 +29,15 @@ STACK * create_stack (int data)
     return newStackPtr;
 }
 
-bool enqueue (STACK ** headPtr, STACK * newStackPtr)
+bool enqueue (STACK ** stackHeadPtr, STACK * newStackPtr)
 {
-    if(headPtr && newStackPtr) {
+    if(stackHeadPtr && newStackPtr) {
         newStackPtr->next = NULL;
-        if(NULL == (*headPtr)) {
-            (*headPtr) = newStackPtr;
+        if(NULL == (*stackHeadPtr)) {
+            (*stackHeadPtr) = newStackPtr;
         }
         else {
-            STACK * currentStackPtr = *headPtr;
+            STACK * currentStackPtr = *stackHeadPtr;
             while(currentStackPtr->next) {
                 currentStackPtr = currentStackPtr->next;
             }
@@ -62,19 +62,19 @@ STACK * dequeue (STACK ** stackHeadPtr)
     }
 }
 
-bool push (STACK ** firstQueuePtr, int data)
+bool push (STACK ** stackHeadPtr, int data)
 {
-    if(firstQueuePtr) {
+    if(stackHeadPtr) {
         STACK * newStackPtr = create_stack(data);
         if(newStackPtr){
 
-            STACK * secondQueuePtr = NULL;
+            STACK * dummyQueuePtr = NULL;
 
-            while(enqueue(&secondQueuePtr, dequeue(firstQueuePtr)));   
+            while(enqueue(&dummyQueuePtr, dequeue(stackHeadPtr)));   
 
-            enqueue(firstQueuePtr, newStackPtr);
+            enqueue(stackHeadPtr, newStackPtr);
 
-            while(enqueue(firstQueuePtr, dequeue(&secondQueuePtr)));
+            while(enqueue(stackHeadPtr, dequeue(&dummyQueuePtr)));
 
             return SUCCESS;
         }
@@ -88,11 +88,11 @@ bool push (STACK ** firstQueuePtr, int data)
     }
 }
 
-int pop (STACK ** headPtr)
+int pop (STACK ** stackHeadPtr)
 {
     int data = 0;
-    if(headPtr) {
-        STACK * tmpPtr = DeQueue(headPtr);
+    if(stackHeadPtr) {
+        STACK * tmpPtr = DeQueue(stackHeadPtr);
         if(tmpPtr) {
             data = tmpPtr->data;
             FREE_STACK(tmpPtr);
@@ -123,6 +123,18 @@ bool clear_stack (STACK ** stackHeadPtr)
             FREE_STACK(tempStackPtr);
             (*stackHeadPtr) = (*stackHeadPtr)->next;
         }
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
+}
+
+bool clear_stack_r (STACK ** stackHeadPtr)
+{
+    if(*stackHeadPtr) {
+        clear_stack_r(&(*stackHeadPtr)->next);
+        FREE_STACK(*stackHeadPtr);
         return SUCCESS;
     }
     else {

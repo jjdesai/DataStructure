@@ -25,6 +25,7 @@
     bool push               (STACK ** stackHeadPtr, int data);
     int pop                 (STACK ** stackHeadPtr);
     void print_stack        (STACK * stackHeadPtr);
-    bool clear_stack       (STACK ** stackHeadPtr);
+    bool clear_stack        (STACK ** stackHeadPtr);
+    bool clear_stack_r      (STACK ** stackHeadPtr);
 
 #endif // _STACK_USING_QUEUE_
