@@ -6,17 +6,20 @@
 
 void main (void)
 {
-    STACK * headPtr = NULL;
-	
-	push(&headPtr, 2);
-	push(&headPtr, 3);
-	print_stack(headPtr);
-	push(&headPtr, 4);
-	push(&headPtr, 6);
-	print_stack(headPtr);
-	pop(&headPtr);
-	push(&headPtr,10);
-	print_stack(headPtr);
+    STACK * queueHeadPtr = NULL;
+
+    push(&queueHeadPtr, 10);
+    push(&queueHeadPtr, 20);
+    push(&queueHeadPtr, 30);
+    push(&queueHeadPtr, 40);
+
+    print_stack(queueHeadPtr);
+    pop(&queueHeadPtr);
+    pop(&queueHeadPtr);
+    print_stack(queueHeadPtr);
+
+    clear_stack_r(&queueHeadPtr);
+    print_stack(queueHeadPtr);
 }
 
 STACK * create_stack (int data)
@@ -92,7 +95,7 @@ int pop (STACK ** stackHeadPtr)
 {
     int data = 0;
     if(stackHeadPtr) {
-        STACK * tmpPtr = DeQueue(stackHeadPtr);
+        STACK * tmpPtr = dequeue(stackHeadPtr);
         if(tmpPtr) {
             data = tmpPtr->data;
             FREE_STACK(tmpPtr);

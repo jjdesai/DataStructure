@@ -19,6 +19,8 @@
 
     }QUEUE;
 
+    QUEUE * create_queue (int data);
+
     bool push       (QUEUE ** queueHeadPtr, QUEUE * newQueuePtr);
     QUEUE * pop     (QUEUE ** queueHeadPtr);
     bool enqueue    (QUEUE ** queueHeadPtr, int data);
