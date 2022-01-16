@@ -55,7 +55,7 @@ bool add_single_link_at_last (SINGLE_LINK ** headPtr, int data)
             return FAIL;
         }
         else {
-            if (NULL == *headPtr) {
+            if (is_single_link_empty(*headPtr)) {
                 *headPtr = newNodePtr;
             }
             else {
