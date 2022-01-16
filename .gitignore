@@ -1,0 +1,4 @@
+# Ignore Visual Studio Code settings
+settings.json
+# Ignore a.out while running local executable file 
+*a.out
