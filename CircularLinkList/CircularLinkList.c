@@ -38,7 +38,7 @@ CIRCULAR_LINK * creat_circular_node (int data)
 
 bool is_circular_link_empty (CIRCULAR_LINK * circularHeadPtr)
 {
-    return ((!circularHeadPtr) ? YES : NO);
+    return ((circularHeadPtr) ? NO : YES);
 }
 
 unsigned int size_of_circular_link (CIRCULAR_LINK * circularHeadPtr)
