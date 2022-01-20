@@ -2,7 +2,7 @@
 #define _CIRCULAR_LINK_LIST_
 
     #define SUCCESS 1
-    #define FAIL   0
+    #define FAIL    0
 
     #define TRUE    1
     #define FALSE   0

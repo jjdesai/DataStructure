@@ -198,7 +198,7 @@ bool delete_circular_link_list_r (CIRCULAR_LINK ** circularHeadPtr, CIRCULAR_LIN
 
 void print_circular_link_list (CIRCULAR_LINK * circularHeadPtr)
 {
-    if(circularHeadPtr) {
+    if(!is_circular_link_empty(circularHeadPtr)) {
         printf(" Circular : ");
         CIRCULAR_LINK * circularHeadPtrDupli = circularHeadPtr;
         do {

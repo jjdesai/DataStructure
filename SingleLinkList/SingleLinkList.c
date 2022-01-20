@@ -116,7 +116,7 @@ bool add_single_link_at_pos (SINGLE_LINK ** headPtr, int data, unsigned int posi
             return FAIL;
         }
         else {
-            if((1 == position) || (NULL == *headPtr))
+            if((1 == position) || is_single_link_empty(headPtr))
             {
                 newNodePtr->next = (* headPtr);
                 (*headPtr) = newNodePtr;
