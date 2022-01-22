@@ -33,7 +33,8 @@ void main ()
 STACK * create_new_stock (int data)
 {
     STACK * newStackPtr = (STACK *) calloc (1, sizeof(STACK));
-    if(newStackPtr) {
+    if(newStackPtr)
+    {
         newStackPtr->data = data;
         newStackPtr->next = NULL;
     }
@@ -49,7 +50,8 @@ unsigned int stack_size (STACK * stackHeadPtr)
 {
     STACK * currentStackPtr = stackHeadPtr;
     int count = 0;
-    while(currentStackPtr) {
+    while(currentStackPtr)
+    {
         currentStackPtr = currentStackPtr->next;
         count += 1;
     }
@@ -63,26 +65,31 @@ int top_from_stack (STACK * stackHeadPtr)
 
 bool push_in_stack (STACK ** stackHeadPtr, int data)
 {
-    if(stackHeadPtr) {
+    if(stackHeadPtr)
+    {
         STACK * newStackPtr = create_new_stock(data);
-        if(newStackPtr) {
+        if(newStackPtr)
+        {
             newStackPtr->next = (*stackHeadPtr);
             (*stackHeadPtr) = newStackPtr;
             return SUCCESS;
         }
-        else {
+        else
+        {
             printf(" Memory allocation failed");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool pop_from_stack (STACK ** stackHeadPtr, int * poppedDataPtr)
 {
-    if(stackHeadPtr && *stackHeadPtr && poppedDataPtr) {
+    if(stackHeadPtr && *stackHeadPtr && poppedDataPtr)
+    {
 
         STACK * tempStackPtr = (*stackHeadPtr);
         (*stackHeadPtr) = tempStackPtr->data;
@@ -91,7 +98,8 @@ bool pop_from_stack (STACK ** stackHeadPtr, int * poppedDataPtr)
         FREE_STACK(tempStackPtr);
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
@@ -99,14 +107,16 @@ bool pop_from_stack (STACK ** stackHeadPtr, int * poppedDataPtr)
 bool swap_stack (STACK ** stackHeadPtr1, STACK ** stackHeadPtr2)
 {
     if( (stackHeadPtr1 && *stackHeadPtr1) &&
-        (stackHeadPtr2 && *stackHeadPtr2)) {
+        (stackHeadPtr2 && *stackHeadPtr2))
+    {
         
         STACK * tempStackPtr = (*stackHeadPtr1);
         (*stackHeadPtr1) = (*stackHeadPtr2);
         (*stackHeadPtr2) = tempStackPtr;
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
@@ -114,7 +124,8 @@ bool swap_stack (STACK ** stackHeadPtr1, STACK ** stackHeadPtr2)
 void print_stack (STACK * stackHeadPtr)
 {
     printf(" Stack : ");
-    while(stackHeadPtr) {
+    while(stackHeadPtr)
+    {
         printf("%d-->", stackHeadPtr->data);
         stackHeadPtr = stackHeadPtr->next;
     }
@@ -123,29 +134,33 @@ void print_stack (STACK * stackHeadPtr)
 
 bool clear_stack (STACK ** stackHeadPtr)
 {
-    if(stackHeadPtr) {
-
+    if(stackHeadPtr)
+    {
         STACK * tempStackPtr = NULL;
-        while(*stackHeadPtr) {
+        while(*stackHeadPtr)
+        {
             tempStackPtr = (*stackHeadPtr);
             FREE_STACK(tempStackPtr);
             (*stackHeadPtr) = (*stackHeadPtr)->next;
         }
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool clear_stack_r (STACK ** stackHeadPtr)
 {
-    if(*stackHeadPtr) {
+    if(*stackHeadPtr)
+    {
         clear_stack_r(&(*stackHeadPtr)->next);
         FREE_STACK(*stackHeadPtr);
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }

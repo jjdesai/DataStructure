@@ -12,7 +12,8 @@ void main (void)
 QUEUE * create_new_queue (int data)
 {
     QUEUE * newQueueNodePtr = calloc(1, sizeof(QUEUE));
-    if(newQueueNodePtr) {
+    if(newQueueNodePtr)
+    {
         newQueueNodePtr->data = data;
         newQueueNodePtr->next = NULL;
     }
@@ -21,28 +22,33 @@ QUEUE * create_new_queue (int data)
 
 bool insert_in_queue (QUEUE ** headQueuePtr, int data)
 {
-    if(headQueuePtr) {
+    if(headQueuePtr)
+    {
         QUEUE * newQueueNodePtr = create_new_queue(data);
-        if (newQueueNodePtr) {
-
-            if(*headQueuePtr) {
+        if (newQueueNodePtr)
+        {
+            if(*headQueuePtr)
+            {
                 QUEUE * currentNodePtr = *headQueuePtr;
                 while(currentNodePtr->next)
                     currentNodePtr = currentNodePtr->next;
                 //newQueueNodePtr->next = currentNodePtr->next; we've already initialize newNodePtr->next with NULL so repeatation is not required
                 currentNodePtr->next = newQueueNodePtr;
             }
-            else {
+            else
+            {
                 (*headQueuePtr) = newQueueNodePtr;
             }
             return SUCCESS;
         }
-        else {
+        else
+        {
             printf(" Memory allocation failed");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 } 
@@ -50,7 +56,8 @@ bool insert_in_queue (QUEUE ** headQueuePtr, int data)
 int remove_from_queue (QUEUE ** headQueuePtr)
 {
     int ret_data = 0;
-    if(*headQueuePtr) {
+    if(*headQueuePtr)
+    {
         QUEUE * tempQueuePtr = *headQueuePtr;
         (*headQueuePtr) = (*headQueuePtr)->next;
         ret_data = tempQueuePtr->data;
@@ -66,12 +73,14 @@ int access_front (QUEUE * headQueuePtr)
 
 int access_back (QUEUE * headQueuePtr)
 {
-    if(headQueuePtr) {
+    if(headQueuePtr)
+    {
         while(headQueuePtr->next)
             headQueuePtr = headQueuePtr->next;
         return headQueuePtr->data;
     }
-    else {
+    else
+    {
         return 0;
     }
 }
@@ -85,7 +94,8 @@ unsigned int size_of_queue (QUEUE * headQueuePtr)
 {
     QUEUE * currentQueuePtr = headQueuePtr;
     int count = 0;
-    while(currentQueuePtr) {
+    while(currentQueuePtr)
+    {
         currentQueuePtr = currentQueuePtr->next;
         count += 1;
     }
@@ -95,14 +105,16 @@ unsigned int size_of_queue (QUEUE * headQueuePtr)
 bool swap_queues (QUEUE ** headQueuePtr1, QUEUE ** headQueuePtr2)
 {
     if( (headQueuePtr1 && *headQueuePtr1) &&
-        (headQueuePtr2 && *headQueuePtr2)) {
+        (headQueuePtr2 && *headQueuePtr2))
+    {
         
         QUEUE * tempQueuePtr = (*headQueuePtr1);
         (*headQueuePtr1) = (*headQueuePtr2);
         (*headQueuePtr2) = tempQueuePtr;
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
@@ -110,7 +122,8 @@ bool swap_queues (QUEUE ** headQueuePtr1, QUEUE ** headQueuePtr2)
 void print_queue (QUEUE * headQueuePtr)
 {
     printf(" Queue : ");
-    while(headQueuePtr) {
+    while(headQueuePtr)
+    {
         printf("%d-->", headQueuePtr->data);
         headQueuePtr = headQueuePtr->next;
     }
@@ -119,29 +132,33 @@ void print_queue (QUEUE * headQueuePtr)
 
 bool clear_queue (QUEUE ** queueHeadPtr)
 {
-    if(queueHeadPtr) {
-        
+    if(queueHeadPtr) 
+    {        
         QUEUE * tempStackPtr = NULL;
-        while(*queueHeadPtr) {
+        while(*queueHeadPtr)
+        {
             tempStackPtr = (*queueHeadPtr);
             FREE_QUEUE(tempStackPtr);
             (*queueHeadPtr) = (*queueHeadPtr)->next;
         }
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool clear_queue_r (QUEUE ** queueHeadPtr)
 {
-    if(*queueHeadPtr) {
+    if(*queueHeadPtr)
+    {
         clear_queue_r(&(*queueHeadPtr)->next);
         FREE_QUEUE(*queueHeadPtr);
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }

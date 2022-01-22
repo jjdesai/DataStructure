@@ -25,7 +25,8 @@ void main (void)
 QUEUE * create_queue (int data)
 {
     QUEUE * newQueuePtr = calloc(1, sizeof(QUEUE));
-    if(newQueuePtr) {
+    if(newQueuePtr)
+    {
         newQueuePtr->data = data;
         newQueuePtr->next = NULL;
     }
@@ -34,12 +35,14 @@ QUEUE * create_queue (int data)
 
 bool push (QUEUE ** queueHeadPtr, QUEUE * newQueuePtr)
 {
-    if(newQueuePtr) {
+    if(newQueuePtr)
+    {
         newQueuePtr->next = (*queueHeadPtr);
         (*queueHeadPtr) = newQueuePtr;
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
@@ -47,7 +50,8 @@ bool push (QUEUE ** queueHeadPtr, QUEUE * newQueuePtr)
 QUEUE * pop (QUEUE ** queueHeadPtr)
 {
     QUEUE * popPtr = NULL;
-    if(*queueHeadPtr) {
+    if(*queueHeadPtr)
+    {
         popPtr = *queueHeadPtr;
         (*queueHeadPtr) = (*queueHeadPtr)->next;
     }
@@ -56,9 +60,11 @@ QUEUE * pop (QUEUE ** queueHeadPtr)
 
 bool enqueue (QUEUE ** queueHeadPtr, int data)
 {
-    if(queueHeadPtr) {
+    if(queueHeadPtr)
+    {
         QUEUE * newQueuePtr = create_queue(data);
-        if(newQueuePtr) {
+        if(newQueuePtr)
+        {
 
             QUEUE * dummyStackPtr = NULL;
 
@@ -70,25 +76,29 @@ bool enqueue (QUEUE ** queueHeadPtr, int data)
 
             return SUCCESS;
         }
-        else {
+        else
+        {
             printf(" Memory allocation failed \n");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 int dequeue (QUEUE ** queueHeadPtr)
 {
-    if(queueHeadPtr) {
+    if(queueHeadPtr)
+    {
         QUEUE * poppedQueuePtr = pop(queueHeadPtr);
         int ret_data = poppedQueuePtr->data;
         FREE_QUEUE(poppedQueuePtr);
         return ret_data;
     }
-    else {
+    else
+    {
         return -1;
     }
 }
@@ -96,7 +106,8 @@ int dequeue (QUEUE ** queueHeadPtr)
 void print_queue (QUEUE * queueHeadPtr)
 {
     printf(" Queue : ");
-    while (queueHeadPtr) {
+    while (queueHeadPtr)
+    {
         printf("%d ", queueHeadPtr->data);
         queueHeadPtr = queueHeadPtr->next;
     }
@@ -105,24 +116,27 @@ void print_queue (QUEUE * queueHeadPtr)
 
 bool clear_queue (QUEUE ** queueHeadPtr)
 {
-    if(queueHeadPtr) {
-
+    if(queueHeadPtr)
+    {
         QUEUE * tempQueuePtr = NULL;
-        while(*queueHeadPtr) {
+        while(*queueHeadPtr)
+        {
             tempQueuePtr = (*queueHeadPtr);
             FREE_QUEUE(tempQueuePtr);
             (*queueHeadPtr) = (*queueHeadPtr)->next;
         }
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool clear_queue_r (QUEUE ** queueHeadPtr)
 {
-    if(*queueHeadPtr) {
+    if(*queueHeadPtr)
+    {
         clear_queue_r(&(*queueHeadPtr)->next);
         FREE_QUEUE(*queueHeadPtr);
         return SUCCESS;

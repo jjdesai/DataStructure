@@ -37,7 +37,8 @@ void main()
 SINGLE_LINK * create_new_node (int data)
 {
     SINGLE_LINK * newNodePtr = (SINGLE_LINK *) calloc(1, sizeof(SINGLE_LINK));
-    if(newNodePtr) {
+    if(newNodePtr)
+    {
         newNodePtr->data = data;
         newNodePtr->next = NULL;
     }
@@ -47,18 +48,22 @@ SINGLE_LINK * create_new_node (int data)
 bool add_single_link_at_last (SINGLE_LINK ** headPtr, int data)
 {
     bool ret_val = FAIL;
-    if (headPtr) {
-
+    if (headPtr)
+    {
         SINGLE_LINK * newNodePtr = create_new_node(data);
-        if (!newNodePtr) {
+        if (!newNodePtr)
+        {
             printf(" Memory allocation fail \n");
             return FAIL;
         }
-        else {
-            if (is_single_link_empty(*headPtr)) {
+        else
+        {
+            if (is_single_link_empty(*headPtr))
+            {
                 *headPtr = newNodePtr;
             }
-            else {
+            else
+            {
                 SINGLE_LINK * currentNodePtr = *headPtr;
                 while(currentNodePtr->next)
                     currentNodePtr = currentNodePtr->next;
@@ -68,26 +73,31 @@ bool add_single_link_at_last (SINGLE_LINK ** headPtr, int data)
             return SUCCESS;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool add_single_link_at_first (SINGLE_LINK ** headPtr, int data)
 {
-    if(headPtr) {
+    if(headPtr)
+    {
         SINGLE_LINK * newNodePtr = create_new_node(data);
-        if (!newNodePtr) {
+        if (!newNodePtr)
+        {
             printf(" Memory allocation fail \n");
             return FAIL;
         }
-        else {
+        else
+        {
             newNodePtr->next = (*headPtr);
             (*headPtr) = newNodePtr;
             return SUCCESS;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }

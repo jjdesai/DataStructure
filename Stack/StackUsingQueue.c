@@ -25,7 +25,8 @@ void main (void)
 STACK * create_stack (int data)
 {
     STACK * newStackPtr = (STACK *) calloc(1, sizeof(STACK));
-    if(newStackPtr) {
+    if(newStackPtr)
+    {
         newStackPtr->data = data;
         newStackPtr->next = NULL;
     }
@@ -34,43 +35,51 @@ STACK * create_stack (int data)
 
 bool enqueue (STACK ** stackHeadPtr, STACK * newStackPtr)
 {
-    if(stackHeadPtr && newStackPtr) {
+    if(stackHeadPtr && newStackPtr)
+    {
         newStackPtr->next = NULL;
-        if(NULL == (*stackHeadPtr)) {
+        if(NULL == (*stackHeadPtr))
+        {
             (*stackHeadPtr) = newStackPtr;
         }
-        else {
+        else
+        {
             STACK * currentStackPtr = *stackHeadPtr;
-            while(currentStackPtr->next) {
+            while(currentStackPtr->next) 
+            {
                 currentStackPtr = currentStackPtr->next;
             }
             currentStackPtr->next = newStackPtr;
         }
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 STACK * dequeue (STACK ** stackHeadPtr)
 {
-    if(stackHeadPtr && (*stackHeadPtr)) {
+    if(stackHeadPtr && (*stackHeadPtr))
+    {
         STACK * tempStackPtr = (*stackHeadPtr);
         (*stackHeadPtr) = (*stackHeadPtr)->next;
         return tempStackPtr;
     }
-    else {
+    else
+    {
         return NULL;
     }
 }
 
 bool push (STACK ** stackHeadPtr, int data)
 {
-    if(stackHeadPtr) {
+    if(stackHeadPtr)
+    {
         STACK * newStackPtr = create_stack(data);
-        if(newStackPtr){
-
+        if(newStackPtr)
+        {
             STACK * dummyQueuePtr = NULL;
 
             while(enqueue(&dummyQueuePtr, dequeue(stackHeadPtr)));   
@@ -81,12 +90,14 @@ bool push (STACK ** stackHeadPtr, int data)
 
             return SUCCESS;
         }
-        else {
+        else
+        {
             printf(" Memory Allocation Failed\n");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
@@ -94,9 +105,11 @@ bool push (STACK ** stackHeadPtr, int data)
 int pop (STACK ** stackHeadPtr)
 {
     int data = 0;
-    if(stackHeadPtr) {
+    if(stackHeadPtr)
+    {
         STACK * tmpPtr = dequeue(stackHeadPtr);
-        if(tmpPtr) {
+        if(tmpPtr)
+        {
             data = tmpPtr->data;
             FREE_STACK(tmpPtr);
             free(tmpPtr);
@@ -109,7 +122,8 @@ int pop (STACK ** stackHeadPtr)
 void print_stack (STACK * stackHeadPtr)
 {
     printf(" Stack : ");
-    while (stackHeadPtr) {
+    while (stackHeadPtr)
+    {
         printf("%d ", stackHeadPtr->data);
         stackHeadPtr = stackHeadPtr->next;
     }
@@ -118,29 +132,33 @@ void print_stack (STACK * stackHeadPtr)
 
 bool clear_stack (STACK ** stackHeadPtr)
 {
-    if(stackHeadPtr) {
-
+    if(stackHeadPtr)
+    {
         STACK * tempStackPtr = NULL;
-        while(*stackHeadPtr) {
+        while(*stackHeadPtr)
+        {
             tempStackPtr = (*stackHeadPtr);
             FREE_STACK(tempStackPtr);
             (*stackHeadPtr) = (*stackHeadPtr)->next;
         }
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool clear_stack_r (STACK ** stackHeadPtr)
 {
-    if(*stackHeadPtr) {
+    if(*stackHeadPtr)
+    {
         clear_stack_r(&(*stackHeadPtr)->next);
         FREE_STACK(*stackHeadPtr);
         return SUCCESS;
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
