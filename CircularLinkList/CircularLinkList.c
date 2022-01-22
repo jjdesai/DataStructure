@@ -39,7 +39,8 @@ int main(int agrc, char ** argv)
 CIRCULAR_LINK * creat_circular_node (int data)
 {
     CIRCULAR_LINK * newCircularPtr = calloc(1, sizeof(CIRCULAR_LINK));
-    if(newCircularPtr) {
+    if(newCircularPtr)
+    {
         newCircularPtr->data = data;
         newCircularPtr->next = NULL;
     }
@@ -54,9 +55,11 @@ bool is_circular_link_empty (CIRCULAR_LINK * circularHeadPtr)
 unsigned int size_of_circular_link (CIRCULAR_LINK * circularHeadPtr)
 {
     unsigned int count = 0;
-    if(!is_circular_link_empty(circularHeadPtr)) {
+    if(!is_circular_link_empty(circularHeadPtr))
+    {
         CIRCULAR_LINK * circularRotationPtr = circularHeadPtr;
-        do {
+        do
+        {
             count++;
             circularRotationPtr = circularRotationPtr->next;
         }while(circularHeadPtr != circularRotationPtr);
@@ -97,17 +100,21 @@ bool add_circular_node_at_first (CIRCULAR_LINK ** circularHeadPtr, int data)
 
 bool add_circular_node_at_end (CIRCULAR_LINK ** circularHeadPtr, int data)
 {
-    if(circularHeadPtr) {
+    if(circularHeadPtr)
+    {
         CIRCULAR_LINK * newCircularLinkNode = creat_circular_node(data);
-        if(newCircularLinkNode) {
-
-            if(is_circular_link_empty(*circularHeadPtr)) {
+        if(newCircularLinkNode)
+        {
+            if(is_circular_link_empty(*circularHeadPtr))
+            {
                 newCircularLinkNode->next = newCircularLinkNode;
                 (*circularHeadPtr) = newCircularLinkNode;
             }
-            else {
+            else
+            {
                 CIRCULAR_LINK * travelNode = (*circularHeadPtr);
-                while(travelNode->next != (*circularHeadPtr)) {
+                while(travelNode->next != (*circularHeadPtr))
+                {
                     travelNode = travelNode->next;
                 }
                 travelNode->next = newCircularLinkNode;
@@ -115,12 +122,14 @@ bool add_circular_node_at_end (CIRCULAR_LINK ** circularHeadPtr, int data)
             }
             return SUCCESS;
         }
-        else {
+        else
+        {
             printf(" Memory allocation failed\n");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
@@ -132,88 +141,105 @@ bool add_circular_node_at_position (CIRCULAR_LINK ** circularHeadPtr, int data, 
 
 bool add_circular_node_after (CIRCULAR_LINK ** circularHeadPtr, int data, int afterData)
 {
-    if(circularHeadPtr) {
-
+    if(circularHeadPtr)
+    {
         CIRCULAR_LINK * newCircularLinkNode = creat_circular_node(data);
-        if(newCircularLinkNode){
-            if(is_circular_link_empty(*circularHeadPtr)) {
-
-            }
-            else {
+        if(newCircularLinkNode)
+        {
+            if(!is_circular_link_empty(*circularHeadPtr))
+            {
                 CIRCULAR_LINK * tmpCircularNodePtr = (*circularHeadPtr);
-                do {
+                do
+                {
                     tmpCircularNodePtr = tmpCircularNodePtr->next;
                 }while(((*circularHeadPtr) != tmpCircularNodePtr) && (tmpCircularNodePtr->data));
             }
         }
-        else {
+        else
+        {
             printf(" Memory Allocation Failed\n");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return SUCCESS;
     }
 }
 
 bool delete_circular_link_list (CIRCULAR_LINK ** circularHeadPtr)
 {
-    if(circularHeadPtr) {
-        if(is_circular_link_empty(*circularHeadPtr)) {
+    if(circularHeadPtr)
+    {
+        if(is_circular_link_empty(*circularHeadPtr))
+        {
             printf(" Circular Link List is already empty\n");
             return FAIL;
         }
-        else {
+        else
+        {
             CIRCULAR_LINK * rotationPtr = (*circularHeadPtr);
             CIRCULAR_LINK * deleteCircularNodePtr = NULL;
-            do {
+            do
+            {
                 deleteCircularNodePtr = rotationPtr;
                 rotationPtr = rotationPtr->next;
                 FREE_CIRCULAR_LINK_NODE(deleteCircularNodePtr);
+
             }while(rotationPtr != (*circularHeadPtr));
             (*circularHeadPtr) = NULL;
             return SUCCESS;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool delete_circular_link_list_r (CIRCULAR_LINK ** circularHeadPtr, CIRCULAR_LINK * rotationCircularNodePtr)
 {
-    if(circularHeadPtr) {
-        if(is_circular_link_empty(*circularHeadPtr)) {
+    if(circularHeadPtr)
+    {
+        if(is_circular_link_empty(*circularHeadPtr))
+        {
             printf(" Circular Link List is already empty\n");
             return FAIL;
         }
-        else if((*circularHeadPtr) != (rotationCircularNodePtr)) {
+        else if((*circularHeadPtr) != (rotationCircularNodePtr))
+        {
             delete_circular_link_list_r(circularHeadPtr, rotationCircularNodePtr->next);
             FREE_CIRCULAR_LINK_NODE(rotationCircularNodePtr);
             return SUCCESS;
         }
-        else {
+        else
+        {
             FREE_CIRCULAR_LINK_NODE((*circularHeadPtr));
             return SUCCESS;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool delete_circular_node_from_beginning (CIRCULAR_LINK ** circularHeadPtr)
 {
-    if(circularHeadPtr) {
-        if(!is_circular_link_empty((*circularHeadPtr))) {
-
-            if((*circularHeadPtr) == (*circularHeadPtr)->next) {
+    if(circularHeadPtr)
+    {
+        if(!is_circular_link_empty((*circularHeadPtr)))
+        {
+            if((*circularHeadPtr) == (*circularHeadPtr)->next)
+            {
                 FREE_CIRCULAR_LINK_NODE(*circularHeadPtr);
             }
-            else {
+            else
+            {
                 CIRCULAR_LINK * travelNode = (*circularHeadPtr);
                 CIRCULAR_LINK * nodeToBeDelete = (*circularHeadPtr);
-                while(travelNode->next != (*circularHeadPtr)) {
+                while(travelNode->next != (*circularHeadPtr))
+                {
                     travelNode = travelNode->next;
                 }
                 travelNode->next = (*circularHeadPtr)->next;
@@ -222,28 +248,34 @@ bool delete_circular_node_from_beginning (CIRCULAR_LINK ** circularHeadPtr)
             }
             return SUCCESS;
         }
-        else {
+        else
+        {
             printf(" Circular Node is Empty\n");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 bool delete_circular_node_from_last (CIRCULAR_LINK ** circularHeadPtr)
 {
-    if(circularHeadPtr) {
-        if(!is_circular_link_empty((*circularHeadPtr))) {
-
-            if((*circularHeadPtr) == (*circularHeadPtr)->next) {
+    if(circularHeadPtr)
+    {
+        if(!is_circular_link_empty((*circularHeadPtr)))
+        {
+            if((*circularHeadPtr) == (*circularHeadPtr)->next)
+            {
                 FREE_CIRCULAR_LINK_NODE((*circularHeadPtr));
             }
-            else {
+            else
+            {
                 CIRCULAR_LINK * travelNode = (*circularHeadPtr);
                 CIRCULAR_LINK * nodeToBeDelete = NULL;
-                while(travelNode->next->next != (*circularHeadPtr)) {
+                while(travelNode->next->next != (*circularHeadPtr))
+                {
                     travelNode = travelNode->next;
                 }
                 nodeToBeDelete = travelNode->next;
@@ -252,25 +284,29 @@ bool delete_circular_node_from_last (CIRCULAR_LINK ** circularHeadPtr)
             }
             return SUCCESS;
         }
-        else {
+        else
+        {
             printf(" Circular Node is Empty\n");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
-// In Progress : 21-01-22
+// In Progress : 22-01-22
 bool delete_specific_circular_node (CIRCULAR_LINK ** circularHeadPtr, int specificData)
 {
     if(circularHeadPtr){    
-        if(!is_circular_link_empty(*circularHeadPtr)){
+        if(!is_circular_link_empty(*circularHeadPtr))
+        {
             CIRCULAR_LINK * followerTravelNodePtr = (*circularHeadPtr);
             CIRCULAR_LINK * travelNodePtr = (*circularHeadPtr);
 
-            do{
+            do
+            {
                 followerTravelNodePtr = travelNodePtr;
                 travelNodePtr = travelNodePtr->next;
 
@@ -288,22 +324,26 @@ bool delete_specific_circular_node (CIRCULAR_LINK ** circularHeadPtr, int specif
 
             }while(1);
         }
-        else{
+        else
+        {
             printf(" Circular Node is Empty\n");
             return FAIL;
         }
     }
-    else {
+    else
+    {
         return FAIL;
     }
 }
 
 void print_circular_link_list (CIRCULAR_LINK * circularHeadPtr)
 {
-    if(!is_circular_link_empty(circularHeadPtr)) {
+    if(!is_circular_link_empty(circularHeadPtr))
+    {
         printf(" Circular : ");
         CIRCULAR_LINK * circularHeadPtrDupli = circularHeadPtr;
-        do {
+        do
+        {
             printf("%d-->", circularHeadPtr->data);
             circularHeadPtr = circularHeadPtr->next;
         }while(circularHeadPtr != circularHeadPtrDupli);
