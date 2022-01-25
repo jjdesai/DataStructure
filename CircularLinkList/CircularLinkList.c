@@ -299,7 +299,8 @@ bool delete_circular_node_from_last (CIRCULAR_LINK ** circularHeadPtr)
 // In Progress : 22-01-22
 bool delete_specific_circular_node (CIRCULAR_LINK ** circularHeadPtr, int specificData)
 {
-    if(circularHeadPtr){    
+    if(circularHeadPtr)
+    {    
         if(!is_circular_link_empty(*circularHeadPtr))
         {
             CIRCULAR_LINK * followerTravelNodePtr = (*circularHeadPtr);
