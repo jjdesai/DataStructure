@@ -23,11 +23,21 @@
 
     }GENERAL_TREE;
 
+    typedef enum _position_
+    {
+        POSITION_ROOT   = 0,
+        POSITION_LEFT,
+        POSITION_RIGHT,
+
+    }E_POSITION; 
+
     GENERAL_TREE * create_general_tree  (int data);
 
-    bool insert_in_tree     (GENERAL_TREE ** headPtr, int data);
-    bool remove_from_tree   (GENERAL_TREE ** headPtr, int data);
-    bool search_in_tree     (GENERAL_TREE * headPtr, int data);
+    bool is_general_tree_empty          (GENERAL_TREE * headPtr);
+    unsigned int size_of_general_tree   (GENERAL_TREE * headPtr);
+
+    bool insert_in_tree         (GENERAL_TREE ** headPtr, int data, E_POSITION pos);
+    bool is_data_present_in_tree (GENERAL_TREE * headPtr, int data);
 
     void print_in_preorder  (GENERAL_TREE * headPtr);
     void print_in_inorder   (GENERAL_TREE * headPtr);
