@@ -42,7 +42,7 @@
     void print_in_preorder  (GENERAL_TREE * headPtr);
     void print_in_inorder   (GENERAL_TREE * headPtr);
     void print_in_postorder (GENERAL_TREE * headPtr);
-    void print_in_list      (GENERAL_TREE * headPtr);
+    void print_in_list      (GENERAL_TREE * headPtr);    // NOTE: Level Order Traversal will require
 
     bool delete_general_tree            (GENERAL_TREE ** headPtr);
     bool delete_node_in_general_tree    (GENERAL_TREE ** headPtr, int data);
@@ -54,10 +54,9 @@
     int get_internet_node_count (GENERAL_TREE * headPtr);
     void print_leaf_node        (GENERAL_TREE * headPtr);   // Same --> void print_external_node    (GENERAL_TREE * headPtr);
     int get_breadth             (GENERAL_TREE * headPtr);   // The number of leaves
-    bool print_ancestor         (GENERAL_TREE * headPtr, int data);
-    bool print_escendants       (GENERAL_TREE * headPtr, int data);
-    int get_depth               (GENERAL_TREE * headPtr);
-    int get_height              (GENERAL_TREE * headPtr);
-    int total_node_at_level     (GENERAL_TREE * headPtr, int level);
+    bool print_ancestor         (GENERAL_TREE * headPtr, int data);     // Root to data path
+    void print_descendant       (GENERAL_TREE * headPtr, int data);     // After data path
+    unsigned int get_height     (GENERAL_TREE * headPtr);
+    int total_node_at_level     (GENERAL_TREE * headPtr, int level);    // NOTE: Level Order Traversal will require
 
 #endif // _GENERAL_TREE_H_

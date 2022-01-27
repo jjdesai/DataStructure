@@ -19,7 +19,6 @@
         10  |20  30  |40  50  60  70  |80  -1  100 90  -1  -1  -1  110
 */
 
-
 int main ()
 {
     GENERAL_TREE * headPtr = NULL;
@@ -69,12 +68,35 @@ int main ()
     printf(" Another Sibling of 70 is [%d]\n", get_siblings(headPtr, 70));
     printf(" Another Sibling of 90 is [%d]\n", get_siblings(headPtr, 90));
 
+    printf(" All Internal Nodes : ");
+    print_internal_node(headPtr);
+    printf("\n");
+
+    printf(" All Leaf Nodes : ");
+    print_leaf_node(headPtr);
+    printf("\n");
+
+    printf(" Ancestor of 100 : [ ");
+    print_ancestor(headPtr, 100);
+    printf("]\n");
+
+    printf(" Descendant of 30 : [ ");
+    print_descendant(headPtr, 30);
+    printf("]\n");
+
+    printf(" Descendant of 20 : [ ");
+    print_descendant(headPtr, 20);
+    printf("]\n");
+
+    printf(" Height of Tree : [%d]\n", get_height(headPtr));
+
     delete_general_tree(&headPtr);
     printf(" -------- \n");
     printf(" Deleting Whole General Tree\n");
 
     printf(" General Tree Size : [%d]\n", size_of_general_tree(headPtr));
     printf(" Root Node Data : [%d]\n", get_root_node_data(headPtr));
+    printf(" Height of Tree : [%d]\n", get_height(headPtr));
 
     return -1;
 }
@@ -284,7 +306,7 @@ int get_root_node_data (GENERAL_TREE * headPtr)
     Parameter : headPtr (In) : Head Pointer
                 data (In)    : Data whose sibling needs to find
     Return :    -1    --> When sibling is not found
-                sibling data --> Return sibling data 
+                Sibling data --> Return sibling data 
 */
 int get_siblings (GENERAL_TREE * headPtr, int data)
 {
@@ -315,7 +337,7 @@ int get_siblings (GENERAL_TREE * headPtr, int data)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Return the sibling.
-    Parameter : headPtr (In) : Head Pointer  
+    Parameter : headPtr (In) : Head Pointer
     Return :    -1    --> When sibling is not found
                 sibling data --> Return sibling data 
 */
@@ -327,8 +349,8 @@ bool is_sibling (GENERAL_TREE * headPtr, int data1, int data2)
     {
         if(headPtr->left && headPtr->right)
         {
-            if( (headPtr->left->data == data1) && (headPtr->right->data == data2) ||
-                (headPtr->right->data == data1) && (headPtr->left->data == data2)   )
+            if( ((headPtr->left->data == data1) && (headPtr->right->data == data2)) ||
+                ((headPtr->right->data == data1) && (headPtr->left->data == data2))   )
             {
                 return YES;
             }
@@ -342,4 +364,126 @@ bool is_sibling (GENERAL_TREE * headPtr, int data1, int data2)
         else
             return NO;
     }
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Print the internel nodes (Internal node is the one who has atleast one child).
+    Parameter : headPtr (In) : Head Pointer  
+    Return :    Print the internal nodes 
+*/
+void print_internal_node (GENERAL_TREE * headPtr)
+{
+    if(is_general_tree_empty(headPtr))
+        return;
+
+    if(headPtr->left || headPtr->right)
+        printf("%d ", headPtr->data);
+
+    if(headPtr->left)
+        print_internal_node(headPtr->left);
+    if(headPtr->right)
+        print_internal_node(headPtr->right);
+
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Print the leaf nodes (Leaf node is the one who has no child).
+    Parameter : headPtr (In) : Head Pointer  
+    Return :    Print the leaf nodes 
+*/
+void print_leaf_node (GENERAL_TREE * headPtr)
+{
+    if(is_general_tree_empty(headPtr))
+        return;
+
+    if( (NULL == headPtr->left) &&
+        (NULL == headPtr->right) )
+        printf("%d ", headPtr->data);
+
+    if(headPtr->left)
+        print_leaf_node(headPtr->left);
+    if(headPtr->right)
+        print_leaf_node(headPtr->right);
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Print the ancestors (Path to data).
+    Parameter : headPtr (In) : Head Pointer
+                data (In)    : Data till which path needs to print
+    Return :    Print the ancestor 
+*/
+bool print_ancestor (GENERAL_TREE * headPtr, int data)
+{
+    if(is_general_tree_empty(headPtr))
+        return NO;
+
+    if(data == headPtr->data)
+    {
+        printf("%d ", headPtr->data);
+        return YES;
+    }
+
+    if( print_ancestor(headPtr->left, data) ||
+        print_ancestor(headPtr->right, data) )
+    {
+        printf("%d ", headPtr->data);
+        return YES;
+    }
+    else
+        return NO;
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Print the descendant (Path after data).
+    Parameter : headPtr (In) : Head Pointer
+                data (In)    : Data after which path needs to print
+    Return :    Print the descendants 
+*/
+void print_descendant (GENERAL_TREE * headPtr, int data)
+{
+    if(is_general_tree_empty(headPtr))
+        return;
+    
+    if(headPtr->data == data)
+    {
+        print_in_inorder(headPtr);
+    }
+    else
+    {
+        print_descendant(headPtr->left, data);
+        print_descendant(headPtr->right, data);
+    }
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Return the height.
+    Parameter : headPtr (In) : Head Pointer
+    Return :    0 -> NULL Tree
+                Height of the tree 
+*/
+unsigned int get_height (GENERAL_TREE * headPtr)
+{
+    if(is_general_tree_empty(headPtr))
+        return 0;
+    else
+    {
+        int leftHeight = get_height(headPtr->left);
+        int rightHeight = get_height(headPtr->right);
+        return (leftHeight > rightHeight) ? (leftHeight+1) : (rightHeight+1);
+    }
+}
+
+int total_node_at_level (GENERAL_TREE * headPtr, int level)
+{
+
 }
