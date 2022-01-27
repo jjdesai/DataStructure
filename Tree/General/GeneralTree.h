@@ -47,9 +47,9 @@
     bool delete_general_tree            (GENERAL_TREE ** headPtr);
     bool delete_node_in_general_tree    (GENERAL_TREE ** headPtr, int data);
 
-    int get_root_node           (GENERAL_TREE * headPtr);
+    int get_root_node_data      (GENERAL_TREE * headPtr);
+    int get_siblings            (GENERAL_TREE * headPtr, int data);
     bool is_sibling             (GENERAL_TREE * headPtr, int data1, int data2);
-    bool print_siblings         (GENERAL_TREE * headPtr, int data);
     void print_internal_node    (GENERAL_TREE * headPtr);
     int get_internet_node_count (GENERAL_TREE * headPtr);
     void print_leaf_node        (GENERAL_TREE * headPtr);   // Same --> void print_external_node    (GENERAL_TREE * headPtr);
