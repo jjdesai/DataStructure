@@ -64,7 +64,7 @@
     void print_left_side_view_of_general_tree   (GENERAL_TREE * headPtr);
     void print_right_side_view_of_general_tree  (GENERAL_TREE * headPtr);
 
-    void print_all_node_at_level_in_general_tree    (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
-    int total_node_at_level_in_general_tree         (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    void print_all_node_at_level_in_general_tree (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    int total_node_at_level_in_general_tree      (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
 
 #endif // _GENERAL_TREE_H_
