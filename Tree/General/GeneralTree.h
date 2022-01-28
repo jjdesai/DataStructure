@@ -57,6 +57,14 @@
     bool print_ancestor         (GENERAL_TREE * headPtr, int data);     // Root to data path
     void print_descendant       (GENERAL_TREE * headPtr, int data);     // After data path
     unsigned int get_height     (GENERAL_TREE * headPtr);
-    int total_node_at_level     (GENERAL_TREE * headPtr, int level);    // NOTE: Level Order Traversal will require
+    int total_node_at_level     (GENERAL_TREE * headPtr, int level);
+
+    void print_bottom_view_of_general_tree      (GENERAL_TREE * headPtr);
+    void print_top_view_of_general_tree         (GENERAL_TREE * headPtr);
+    void print_left_side_view_of_general_tree   (GENERAL_TREE * headPtr);
+    void print_right_side_view_of_general_tree  (GENERAL_TREE * headPtr);
+
+    void print_all_node_at_level_in_general_tree    (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    int total_node_at_level_in_general_tree         (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
 
 #endif // _GENERAL_TREE_H_
