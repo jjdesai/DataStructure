@@ -29,7 +29,7 @@
         POSITION_LEFT,
         POSITION_RIGHT,
 
-    }E_POSITION; 
+    }E_POSITION;
 
     GENERAL_TREE * create_general_tree  (int data);
 
