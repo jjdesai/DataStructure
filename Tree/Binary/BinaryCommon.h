@@ -10,15 +10,16 @@
     #define YES     1
     #define NO      0
 
-    #define FREE_BINARY_TREE_NODE(VAR)  free(VAR);  \
+    #define FREE_BINARY_TREE_NODE(VAR)  printf("Deleting...[%d]\n", VAR->data); \
+                                        free(VAR);  \
                                         VAR = NULL; 
 
     typedef unsigned char bool;
 
     typedef struct _binary_tree_
     {
-        int data;
         struct _binary_tree_ * left;
+        int data;
         struct _binary_tree_ * right;
 
     }BINARY_TREE;
@@ -38,6 +39,7 @@
         FULL_BINARY_TREE,       // PROPER_BINARY_TREE, STRICT_BINARY_TREE
         COMPLETE_BINARY_TREE,
         PERFECT_BINARY_TREE,
+        BALANCED_BINARY_TREE,
         DEGENERATE_BINARY_TREE,
 
         MAX_BINARY_TREE_TYPE,

@@ -2,17 +2,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "Complete_BinaryTree.h"
 #include "../BinaryCommon.c"    // As Make File is not completed, need to add .c
                                 // Chnage it to .h once makefile is ready
-
+#include "Complete_BinaryTree.h"
 
 /*
-                __10__
-               /      \
-              20      30
-             /  \    /
-            40  50  60
+                 ______10______
+                /              \
+              _20__          __30_
+             /     \        /     \
+            40     50      60      70
+           /  \   /  \    /  \    /  \
+          80  90 100 110 120 130 140 150
 */
 
 unsigned int find_left_tree_height (BINARY_TREE * headPtr);
@@ -31,8 +32,16 @@ int main (int argc, char ** argv)
     headPtr->right->right = create_binary_tree(70);
     headPtr->left->left->left = create_binary_tree(80);
 
-    printf(" Total no of Node : [%d]\n", total_number_of_node_in_complete_binary_tree(headPtr));
-    printf(" Binary Tree Size : [%d]\n", total_node_in_binary_tree(headPtr));
+    // headPtr->left->left->right = create_binary_tree(90);
+    // headPtr->left->right->left = create_binary_tree(100);
+    // headPtr->left->right->right = create_binary_tree(110);
+    // headPtr->right->left->left = create_binary_tree(120);
+    // headPtr->right->left->right = create_binary_tree(130);
+    // headPtr->right->right->left = create_binary_tree(140);
+    // headPtr->right->right->right = create_binary_tree(150);
+
+    printf(" Total no of Node : [%d]\n", total_node_in_complete_binary_tree(headPtr));
+    printf(" Complete Binary Tree Size : [%d]\n", total_node_in_binary_tree(headPtr));
 
     if(is_tree_a_complete_tree(headPtr))
         printf(" Given Binary Tree is Complete Binary Tree\n");
@@ -40,8 +49,8 @@ int main (int argc, char ** argv)
         printf(" Given Binary Tree is not a Complete Binary Tree\n");
 
     delete_binary_tree(&headPtr);
-    printf("--- --- --- --- ---\n");
-    printf(" Binary Tree Size : [%d]\n", total_node_in_binary_tree(headPtr));
+    printf("--- --- Delete Complete Binary Tree --- ---\n");
+    printf(" Complete Binary Tree Size : [%d]\n", total_node_in_binary_tree(headPtr));
 
     return -1;
 }
@@ -82,7 +91,7 @@ unsigned int find_right_tree_height (BINARY_TREE * headPtr)
     Check total_node_in_binary_tree and compare the Complexity
 
 */
-unsigned int  total_number_of_node_in_complete_binary_tree (BINARY_TREE * headPtr)
+unsigned int  total_node_in_complete_binary_tree (BINARY_TREE * headPtr)
 {
     if(is_binary_tree_empty(headPtr))
         return 0;
@@ -90,12 +99,12 @@ unsigned int  total_number_of_node_in_complete_binary_tree (BINARY_TREE * headPt
     unsigned int leftTreeHeight = find_left_tree_height(headPtr);
     unsigned int rightTreeHeight = find_right_tree_height(headPtr);
 
-    if(leftTreeHeight == rightTreeHeight)       // This represent Full Binary Tree so
+    if(leftTreeHeight == rightTreeHeight)       // This represent Perfect Binary Tree so
         return ((1<<leftTreeHeight) -1) ;       // total node = (2^height)-1
     else
         return (1                                                           +
-                total_number_of_node_in_complete_binary_tree(headPtr->left) +
-                total_number_of_node_in_complete_binary_tree(headPtr->right) );
+                total_node_in_complete_binary_tree(headPtr->left) +
+                total_node_in_complete_binary_tree(headPtr->right) );
 }
 
 /*

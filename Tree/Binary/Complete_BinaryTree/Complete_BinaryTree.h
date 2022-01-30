@@ -12,23 +12,23 @@
         - The last leaf element might not have a right sibling i.e. a complete binary tree
           doesn't have to be a full binary tree.
 
-        Example :              Figure-1             Figure-2            Figure-3
-                                ------               ------              ------
-                                __10__               __10__              __10__    
-                               /      \             /      \            /      \   
-                              20      30           20      30          20      30  
-                             /  \    /  \         /       /  \        /  \       \ 
-                            40  50  60  70       40      60  70      40  50      70
-                           /                    /                   /              
-                          80                   80                  80              
+        Example :      Figure-1             Figure-2            Figure-3
+                        ------               ------              ------
+                        __10__               __10__              __10__    
+                       /      \             /      \            /      \   
+                      20      30           20      30          20      30  
+                     /  \    /  \         /       /  \        /  \       \   
+                    40  50  60  70       40      60  70      40  50      70
+                   /                    /                   /              
+                  80                   80                  80              
 
-            Figure-1, Figure-2 are Complete Binary Tree
-            Figure-3 is not a Complete Binary Tree as there is no left of 30 but it has right
+                  Figure-1, Figure-2 are Complete Binary Tree
+                  Figure-3 is not a Complete Binary Tree as there is no left of 30 but it has right
     */
 
-    #include "../BinaryCommon.h"
+    unsigned int total_node_in_complete_binary_tree (BINARY_TREE * headPtr);
+    int is_tree_a_complete_tree (BINARY_TREE * headPtr);
 
-    unsigned int total_number_of_node_in_complete_binary_tree (BINARY_TREE * headPtr);
-    int is_tree_a_complete_tree(BINARY_TREE * headPtr);
+    int delete_node_from_complete_binary_tree (BINARY_TREE * headPtr, int data);
 
 #endif // _COMPLETE_BINARY_TREE_H_
