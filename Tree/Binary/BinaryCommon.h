@@ -10,8 +10,7 @@
     #define YES     1
     #define NO      0
 
-    #define FREE_BINARY_TREE_NODE(VAR)  printf("Deleting...[%d]\n", VAR->data); \
-                                        free(VAR);  \
+    #define FREE_BINARY_TREE_NODE(VAR)  free(VAR);  \
                                         VAR = NULL; 
 
     typedef unsigned char bool;

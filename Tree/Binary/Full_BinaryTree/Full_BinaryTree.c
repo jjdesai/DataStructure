@@ -2,6 +2,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+
+// #include "../PrintMyBinary.c"
+// /home/jdesai/Git/DataStructure/Tree/Binary/Full_BinaryTree/Full_BinaryTree.c
+#include "/home/jdesai/Git/DataStructure/Tree/Binary/PrintMyBinaryTree.c"
 #include "../BinaryCommon.c"    // As Make File is not completed, need to add .c
                                 // Chnage it to .h once makefile is ready
 #include "Full_BinaryTree.h"
@@ -46,6 +50,10 @@ int main (int argc, char ** argv)
 
     printf(" Total no of Node : [%d]\n", total_node_in_full_binary_tree(headPtr));
     printf(" Full Binary Tree Size : [%d]\n", total_node_in_binary_tree(headPtr));
+
+    printf("\n\n");
+    print_my_binary_tree(headPtr);
+    printf("\n\n");
 
     // To Check delete_node_from_full_binary_tree
     // printf(" Deleting 120 : [%d]\n", delete_node_from_full_binary_tree(&headPtr, 120));  // Node can not delete
@@ -139,13 +147,12 @@ int is_tree_a_full_binary_tree(BINARY_TREE * headPtr)
     else if(headPtr->left && headPtr->right)
     {
         // left & right both present, so go inside the tree 
-        if(NO == is_tree_a_full_binary_tree(headPtr->left))
+        if(NO == is_tree_a_full_binary_tree(headPtr->left))         // Travel on left Sub-Tree
             return NO;
-        else if (NO == is_tree_a_full_binary_tree(headPtr->right))
+        else if (NO == is_tree_a_full_binary_tree(headPtr->right))  // Travel on right Sub-Tree
             return NO;
-        else {
+        else
             return YES;
-        }
     }
     else
     {
@@ -161,12 +168,15 @@ int delete_node_from_full_binary_tree (BINARY_TREE ** headPtr, int data)
 
     if(data == (*headPtr)->data)
     {
+        // data found on Full Binary Tree
         if((NULL == (*headPtr)->left) || (NULL == (*headPtr)->right))
         {
+            // data found on leaf node, no need to delete. 
             return FAIL;
         }
         else
         {
+            // data found on internal node, need to delete entire left and right sub tree
             delete_binary_tree(&(*headPtr)->left);
             delete_binary_tree(&(*headPtr)->right);
             return SUCCESS;
@@ -174,9 +184,10 @@ int delete_node_from_full_binary_tree (BINARY_TREE ** headPtr, int data)
     }
     else
     {
-        if(SUCCESS == delete_node_from_full_binary_tree(&(*headPtr)->left, data))
+        // data not found on Full Binary Tree 
+        if(SUCCESS == delete_node_from_full_binary_tree(&(*headPtr)->left, data))           // Check on left Sub-Tree
             return SUCCESS;
-        else if(SUCCESS == delete_node_from_full_binary_tree(&(*headPtr)->right, data))
+        else if(SUCCESS == delete_node_from_full_binary_tree(&(*headPtr)->right, data))     // Check on right Sub-Tree
             return SUCCESS;
         else
             return FAIL;
