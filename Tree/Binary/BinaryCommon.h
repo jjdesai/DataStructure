@@ -95,7 +95,9 @@
     void print_right_side_view_of_binary_tree  (BINARY_TREE * headPtr);
 
     void print_all_node_at_level_in_binary_tree (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
-    int total_node_at_level_in_binaryl_tree      (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    int total_node_at_level_in_binaryl_tree     (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
 
+    // https://www.sanfoundry.com/c-program-find-lowest-common-ancestor/
+    int lowest_common_ancestor                  (BINARY_TREE * headPtr, unsigned int data1, unsigned int data2);
 
 #endif // _BINARY_TREE_COMMON_H_
