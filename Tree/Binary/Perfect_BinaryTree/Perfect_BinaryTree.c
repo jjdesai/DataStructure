@@ -40,8 +40,18 @@ int main(int argc, char ** argv)
     headPtr->right->right->left = create_binary_tree(140);
     headPtr->right->right->right = create_binary_tree(150);
 
+    print_my_binary_tree(headPtr);
+
     printf(" Total no of Node : [%lu]\n", total_node_in_perfect_binary_tree(headPtr));
 
+    if(is_tree_a_perfect_binary_tree(headPtr))
+        printf(" Given Binary Tree is a Perfect Binary Tree\n");
+    else
+        printf(" Given Binary Tree is not a Perfect Binary Tree\n");
+
+    delete_binary_tree(&headPtr);
+
+    printf(" Total no of Node : [%lu]\n", total_node_in_perfect_binary_tree(headPtr));
 }
 
 unsigned int get_height_of_perfect_binary_tree (BINARY_TREE * headPtr)
@@ -59,10 +69,21 @@ long unsigned int total_node_in_perfect_binary_tree (BINARY_TREE * headPtr)
     else
     {
         unsigned int height = get_height_of_perfect_binary_tree(headPtr);
-        long unsigned int total_node = 1;
+        long unsigned int totalNode = 1;
         for(int i=0; i<height; i++)
-            total_node *= 2;
-        return ((1<<height) - 1);
+            totalNode *= 2;
+        return totalNode-1;
     }
 }
 
+int is_tree_a_perfect_binary_tree (BINARY_TREE * headPtr)
+{
+    unsigned int treeSize = 0;
+    unsigned int totalNodeFromHeight = 0;
+    
+    totalNodeFromHeight = total_node_in_perfect_binary_tree(headPtr);
+    
+    treeSize = total_node_in_binary_tree(headPtr);
+
+    return (totalNodeFromHeight == treeSize);
+}
