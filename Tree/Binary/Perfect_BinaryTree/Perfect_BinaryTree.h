@@ -20,7 +20,8 @@
                 Figure-3 is not a Perfect Binary Tree as node 80 & 90 are in different level than 56, 60 & 70.
     */
 
-    unsigned int total_node_in_perfect_binary_tree (BINARY_TREE * headPtr);
+    unsigned int get_height_of_perfect_binary_tree (BINARY_TREE * headPtr);
+    long unsigned int total_node_in_perfect_binary_tree (BINARY_TREE * headPtr);
     int is_tree_a_perfect_binary_tree (BINARY_TREE * headPtr);
 
 #endif // _PERFECT_BINARY_TREE_H_

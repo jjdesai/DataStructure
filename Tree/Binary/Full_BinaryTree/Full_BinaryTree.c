@@ -2,10 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-
-// #include "../PrintMyBinary.c"
-// /home/jdesai/Git/DataStructure/Tree/Binary/Full_BinaryTree/Full_BinaryTree.c
-#include "/home/jdesai/Git/DataStructure/Tree/Binary/PrintMyBinaryTree.c"
+#include "../PrintMyBinaryTree.c"
 #include "../BinaryCommon.c"    // As Make File is not completed, need to add .c
                                 // Chnage it to .h once makefile is ready
 #include "Full_BinaryTree.h"
