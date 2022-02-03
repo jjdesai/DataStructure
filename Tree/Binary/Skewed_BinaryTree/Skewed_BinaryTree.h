@@ -24,7 +24,6 @@
                        40               40                 40            40            40
                        /                  \               /             /             /
                       50                  50            50            50            50
-
     */ 
 
     typedef enum {
@@ -35,9 +34,8 @@
         
     }TYPE_OF_SKEWED_BINARY_TREE;
 
-    unsigned int get_height_of_generate_binary_tree (BINARY_TREE * headPtr);
-    long unsigned int total_node_in_generate_binary_tree (BINARY_TREE * headPtr);
-    int is_tree_a_generate_binary_tree (BINARY_TREE * headPtr);
+    unsigned int get_height_of_skewed_binary_tree (BINARY_TREE * headPtr);
+    unsigned int total_node_in_skewed_binary_tree (BINARY_TREE * headPtr);
 
     bool is_tree_a_left_skewed_binary_tree   (BINARY_TREE * headPtr);
     bool is_tree_a_right_skewed_binary_tree  (BINARY_TREE * headPtr);

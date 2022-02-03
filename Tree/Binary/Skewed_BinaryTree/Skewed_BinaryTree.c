@@ -32,6 +32,10 @@ int main(int argc, char ** argv)
     printf(" To check Left : [%s]\n", is_tree_a_left_skewed_binary_tree(leftSkewedHeadPtr)?"YES":"NO");
     printf(" To check Mix : [%s]\n", is_tree_a_mix_skewed_binary_tree(mixSkewedHeadPtr)?"YES":"NO");
 
+    printf(" Height of Left : [%d]\n", get_height_of_skewed_binary_tree(leftSkewedHeadPtr));
+    printf(" Height of Right : [%d]\n", get_height_of_skewed_binary_tree(rightSkewedHeadPtr));
+    printf(" Height of Mix : [%d]\n", get_height_of_skewed_binary_tree(mixSkewedHeadPtr));
+
     delete_binary_tree(&leftSkewedHeadPtr);
     delete_binary_tree(&rightSkewedHeadPtr);
     delete_binary_tree(&mixSkewedHeadPtr);
@@ -74,6 +78,26 @@ void create_mix_skewed (BINARY_TREE ** headPtr)
         (*headPtr)->right->left->right = create_binary_tree(40);          //      40
         (*headPtr)->right->left->right->left = create_binary_tree(50);    //    50
     }
+}
+
+unsigned int get_height_of_skewed_binary_tree (BINARY_TREE * headPtr)
+{
+    if(is_binary_tree_empty(headPtr))
+        return 0;
+    else
+        return (1                                                                       + 
+                ((headPtr->left) ?  get_height_of_skewed_binary_tree(headPtr->left) :
+                                    get_height_of_skewed_binary_tree (headPtr->right)));
+}
+
+unsigned int total_node_in_skewed_binary_tree (BINARY_TREE * headPtr)
+{
+    if(is_binary_tree_empty(headPtr))
+        return 0;
+    else
+        return (1                                                                       + 
+                ( (headPtr->left) ?  get_height_of_skewed_binary_tree(headPtr->left) :
+                                    get_height_of_skewed_binary_tree (headPtr->right)));
 }
 
 bool is_tree_a_left_skewed_binary_tree (BINARY_TREE * headPtr)
