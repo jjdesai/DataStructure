@@ -4,10 +4,10 @@
     /*
 
     Skewed Binary Defination :
-        Degenerate Binary Tree is a Binary Tree where every parent node has only one child node.
-        Height of a Degenerate Binary Tree is equal to Total number of nodes in that tree.
+        Skewed Binary Tree is a Binary Tree where every parent node has only one child node.
+        Height of a Skewed Binary Tree is equal to Total number of nodes in that tree.
 
-        There is three types of Degenerate Binary Tree.
+        There is three types of Skewed Binary Tree.
          1. Left Skewed Binary Tree
          2. Right Skewed Binary Tree
          3. Mixed Skewed Binary Tree
