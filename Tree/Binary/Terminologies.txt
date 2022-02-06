@@ -28,7 +28,7 @@ Leaf Node:
 Internal Node:
     As the name suggests, these are inner nodes with at least one child.
 
-Degree of Tree
+Degree of Tree:
     In a tree data structure, the total number of children of a node is called as DEGREE of that Node.
 
 Level:
@@ -43,6 +43,10 @@ Depth of a Tree:
 Height of a Tree:
     It is the number of edges from the node to the deepest leaf. The tree height is also considered
     the root height.
+
+Diameter or Width
+    The diameter of a tree (sometimes called the width) is the number of nodes on the longest path
+    between two end nodes in binary tree.
 
 Size:
     Size of a binary tree refers to the number of nodes it has.
@@ -64,3 +68,22 @@ Sub-Tree:
     In a tree data structure, each child from a node forms a subtree recursively.
     Every child node will form a subtree on its parent node.
 
+https://iq.opengenus.org/views-in-binary-tree/#:~:text=In%20this%20article%2C%20we%20have,and%20Pointer%20to%20right%20child.
+Different Types of Views in Binary Tree are :
+    1. Left View
+    2. Right View
+    3. Top View
+    4. Bottom View
+
+https://www.topcoder.com/thrive/articles/vertical-order-traversal-of-a-binary-tree
+Horizontal Distance:
+    Horizontal Distance is the distance of a node from the root node. The HD of the root node is zero.
+    Any node that falls in the vertical line after the root node line will be positive, and any
+    node that falls in the vertical line to the left of the root node will be negative.
+
+https://www.geeksforgeeks.org/vertical-sum-in-a-given-binary-tree/
+Vertical Sum :
+    For a given level, sum of all the nodes is called as Vertical Sum.
+
+https://www.youtube.com/watch?v=fnmisPM6cVo&t=685s
+Childern Sum Property

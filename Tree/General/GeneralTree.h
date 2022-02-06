@@ -10,6 +10,52 @@
     #define YES     1
     #define NO      0
 
+    #define FREE_GENERAT_TREE_NODE(VAR) \
+        (VAL)->degree = 0;              \
+        free((VAL)->childHeadPtr);      \
+        (VAL)->childHeadPtr = NULL;     \
+        free(VAL);                      \
+        VAL = NULL;
+
+    typedef unsigned char bool;
+
+    typedef struct _general_tree_
+    {
+        unsigned int data;
+        unsigned int degree;
+        struct _general_tree_ ** childHeadPtr;
+
+    }GENERAL_TREE;
+
+    GENERAL_TREE * creat_general_tree (int data);
+
+    bool is_general_tree_empty (GENERAL_TREE * headPtr);
+    
+    bool insert_in_general_tree (GENERAL_TREE ** headPtr, unsigned int data, unsigned int parentData);
+
+    bool delete_general_tree (GENERAL_TREE ** headPtr);
+
+    void print_general_tree_in_preorder (GENERAL_TREE * headPtr);
+    void print_general_tree_in_postorder (GENERAL_TREE * headPtr);
+    
+
+
+#endif
+
+#define _GENERAL_TREE_H_
+
+#ifndef _GENERAL_TREE_H_
+#define _GENERAL_TREE_H_
+
+    #define SUCCESS 1
+    #define FAIL    0
+
+    #define TRUE    1
+    #define FALSE   0
+
+    #define YES     1
+    #define NO      0
+
     #define FREE_GENERAT_TREE_NODE(VAR) free(VAR);  \
                                         VAR = NULL; 
 
@@ -18,8 +64,8 @@
     typedef struct _general_tree_
     {
         int data;
-        struct _general_tree_ * left;
-        struct _general_tree_ * right;
+        int degree;
+        struct _general_tree_ ** childNodePtr;
 
     }GENERAL_TREE;
 

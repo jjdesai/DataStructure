@@ -100,4 +100,7 @@
     // https://www.sanfoundry.com/c-program-find-lowest-common-ancestor/
     int lowest_common_ancestor                  (BINARY_TREE * headPtr, unsigned int data1, unsigned int data2);
 
+    https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#:~:text=The%20left%20boundary%20is%20defined,left%20boundary%20or%20right%20boundary.
+    void print_boundry_of_binary_tree           (BINARY_TREE * headPtr);
+
 #endif // _BINARY_TREE_COMMON_H_
