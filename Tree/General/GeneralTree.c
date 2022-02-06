@@ -6,6 +6,20 @@
 #include "GeneralTree.h"
 
 /*
+                            0
+                            |
+                |-----------|-----------|
+                1           2           3
+                |           |           |
+            |--------|  |---|----|  |--------|
+            11  12  13  21  22  23  31  32  33
+            |               |                |
+         |-----|   |----|---|---|----|    |-----|
+        111   112  221 222 223 224  225  331   332
+
+*/
+
+/*
                     10
                 ___/  \___
                /          \
@@ -23,82 +37,35 @@ int main ()
 {
     GENERAL_TREE * headPtr = NULL;
 
-    insert_in_tree(&headPtr, 10, POSITION_ROOT);             // HEAD -> 10
-    insert_in_tree(&headPtr, 20, POSITION_LEFT);             // 10->(left)->20
-    insert_in_tree(&headPtr, 30, POSITION_RIGHT);            // 10->(right)->30
+    insert_in_general_tree(&headPtr, 0, 0);
     
-    insert_in_tree(&headPtr->left, 40, POSITION_LEFT);       // 20->(left)->40
-    insert_in_tree(&headPtr->left, 50, POSITION_RIGHT);      // 20->(right)->50
-    
-    insert_in_tree(&headPtr->right, 60, POSITION_LEFT);      // 30->(left)->60
-    insert_in_tree(&headPtr->right, 70, POSITION_RIGHT);     // 30->(right)->70
+    insert_in_general_tree(&headPtr, 1, 0);
+    insert_in_general_tree(&headPtr, 2, 0);
+    insert_in_general_tree(&headPtr, 3, 0);
 
-    insert_in_tree(&headPtr->left->left, 80, POSITION_LEFT);    // 40->(left)->80
-    insert_in_tree(&headPtr->left->right, 90, POSITION_LEFT);   // 50->(left)->90
-    insert_in_tree(&headPtr->left->right, 100, POSITION_RIGHT); // 50->(right)->100
-     
+    insert_in_general_tree(&headPtr, 11, 1);
+    insert_in_general_tree(&headPtr, 12, 1);
+    insert_in_general_tree(&headPtr, 13, 1);
 
-    insert_in_tree(&headPtr->right->right, 110, POSITION_RIGHT);   // 70->(right)->110
+    insert_in_general_tree(&headPtr, 21, 2);
+    insert_in_general_tree(&headPtr, 22, 2);
+    insert_in_general_tree(&headPtr, 23, 2);
 
-    printf(" General Tree Size : [%d]\n", size_of_general_tree(headPtr));
+    insert_in_general_tree(&headPtr, 31, 3);
+    insert_in_general_tree(&headPtr, 32, 3);
+    insert_in_general_tree(&headPtr, 33, 3);
 
-    printf(" Pre-Order\t: ");
-    print_in_preorder(headPtr);
+    printf(" General Tree in Pre-Order : ");
+    print_general_tree_in_preorder(headPtr);
     printf("\n");
 
-    printf(" Post-Order\t: ");
-    print_in_postorder(headPtr);
+    printf(" General Tree in Post-Order : ");
+    print_general_tree_in_postorder(headPtr);
     printf("\n");
-
-    printf(" In-Order\t: ");
-    print_in_inorder(headPtr);
-    printf("\n");
-
-    printf(" Data 5 is [%s]\n", is_data_present_in_tree(headPtr, 5) ? "Present" : "Absent");
-    printf(" Data 100 is [%s]\n", is_data_present_in_tree(headPtr, 100) ? "Present" : "Absent");
-    printf(" Data 10 is [%s]\n", is_data_present_in_tree(headPtr, 10) ? "Present" : "Absent");
-
-    printf(" Root Node Data : [%d]\n", get_root_node_data(headPtr));
-
-    printf(" 10 Sibling 20 [%s]\n", is_sibling(headPtr, 10, 20) ? "YES" : "NO");
-    printf(" 90 Sibling 100 [%s]\n", is_sibling(headPtr, 90, 100) ? "YES" : "NO");
-    printf(" 90 Sibling 100 [%s]\n", is_sibling(headPtr, 100, 90) ? "YES" : "NO");
-
-    printf(" Another Sibling of 10 is [%d]\n", get_siblings(headPtr, 10));
-    printf(" Another Sibling of 70 is [%d]\n", get_siblings(headPtr, 70));
-    printf(" Another Sibling of 90 is [%d]\n", get_siblings(headPtr, 90));
-
-    printf(" All Internal Nodes : ");
-    print_internal_node(headPtr);
-    printf("\n");
-
-    printf(" All Leaf Nodes : ");
-    print_leaf_node(headPtr);
-    printf("\n");
-
-    printf(" Ancestor of 100 : [ ");
-    print_ancestor(headPtr, 100);
-    printf("]\n");
-
-    printf(" Descendant of 30 : [ ");
-    print_descendant(headPtr, 30);
-    printf("]\n");
-
-    printf(" Descendant of 20 : [ ");
-    print_descendant(headPtr, 20);
-    printf("]\n");
-
-    printf(" Height of Tree : [%d]\n", get_height(headPtr));
 
     delete_general_tree(&headPtr);
-    printf(" -------- \n");
-    printf(" Deleting Whole General Tree\n");
 
-    printf(" General Tree Size : [%d]\n", size_of_general_tree(headPtr));
-    printf(" Root Node Data : [%d]\n", get_root_node_data(headPtr));
-    printf(" Height of Tree : [%d]\n", get_height(headPtr));
-
-    return -1;
+    return 1;
 }
 
 /*
