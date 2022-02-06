@@ -1,0 +1,66 @@
+
+Terminologies associated with Binary Trees and Types of Binary Trees
+
+Node:
+    It represents a termination point in a tree.
+
+Root:
+    A tree’s topmost node.
+
+Edges:
+    In a tree data structure, the connecting link between any two nodes is called as EDGE.
+    In a tree with 'N' number of nodes there will be a maximum of 'N-1' number of edges.
+
+Parent:
+    Each node (apart from the root) in a tree that has at least one sub-node of its own is
+    called a parent node.
+    
+Child:
+    A node that straightway came from a parent node when moving away from the root is the child node.
+
+Siblings:
+    In a tree data structure, nodes which belong to same Parent are called as Siblings.
+    In simple words, the nodes with the same parent are called Sibling nodes.
+    
+Leaf Node:
+    These are external nodes. They are the nodes that have no child.
+
+Internal Node:
+    As the name suggests, these are inner nodes with at least one child.
+
+Degree of Tree
+    In a tree data structure, the total number of children of a node is called as DEGREE of that Node.
+
+Level:
+    The distance from a node 'B' to the root node is the level of 'B'. The root is at level 0,
+    the root’s children are at level 1, and so on.
+    (In simple words, in a tree each step from top to bottom is called as a Level and the Level
+    count starts with '0' and incremented by one at each level)
+
+Depth of a Tree:
+    The number of edges from the tree’s node to the root is.
+
+Height of a Tree:
+    It is the number of edges from the node to the deepest leaf. The tree height is also considered
+    the root height.
+
+Size:
+    Size of a binary tree refers to the number of nodes it has.
+
+Path:
+    In a tree data structure, the sequence of Nodes and Edges from one node to another node is
+    called as PATH between that two Nodes.
+
+Lenght of Path
+    Length of a Path is total number of nodes in that path
+
+Internal Path Length:
+    The sum of the levels of each of the internal nodes in a tree is called the Internal Path Length of that tree
+
+External Path Length:
+    The sum of the levels of each of the external nodes in a tree is called the External Path Length.
+
+Sub-Tree:
+    In a tree data structure, each child from a node forms a subtree recursively.
+    Every child node will form a subtree on its parent node.
+
