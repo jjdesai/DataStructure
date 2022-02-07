@@ -5,6 +5,8 @@
 
 #include "GeneralTree.h"
 
+GENERAL_TREE * get_node_from_data (GENERAL_TREE * headPtr, int parentData);
+
 /*
                             0
                             |
@@ -15,22 +17,7 @@
             11  12  13  21  22  23  31  32  33
             |               |                |
          |-----|   |----|---|---|----|    |-----|
-        111   112  221 222 223 224  225  331   332
-
-*/
-
-/*
-                    10
-                ___/  \___
-               /          \
-              20          30
-             /  \        /  \
-           40   50     60    70
-           /   /  \            \
-          80  90  100          110
-
-        0   |1   2   |3   4   5   6   |7   8   9   10  11  12  13  14
-        10  |20  30  |40  50  60  70  |80  -1  100 90  -1  -1  -1  110
+        111   112  221 222 223 224 225   331   332
 */
 
 int main ()
@@ -59,11 +46,21 @@ int main ()
     print_general_tree_in_preorder(headPtr);
     printf("\n");
 
+    delete_node_from_general_tree(&headPtr, 21);
+
+    printf(" General Tree in Pre-Order : ");
+    print_general_tree_in_preorder(headPtr);
+    printf("\n");
+
     printf(" General Tree in Post-Order : ");
     print_general_tree_in_postorder(headPtr);
     printf("\n");
 
+    printf(" Total Size of General Tree : [%d]\n", total_nodes_in_general_tree(headPtr));
+
     delete_general_tree(&headPtr);
+
+    printf(" Total Size of General Tree : [%d]\n", total_nodes_in_general_tree(headPtr));
 
     return 1;
 }
@@ -72,19 +69,19 @@ int main ()
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Create a new node and return without checking the allocation.
-    Parameter : headPtr (In) -> Head Pointer 
+    Parameter : data (In) -> data to be filled in data-structure 
     Return :    New Node
 */
-GENERAL_TREE * create_general_tree (int data)
+GENERAL_TREE * creat_general_tree (int data)
 {
-    GENERAL_TREE * newGeneralNode = (GENERAL_TREE *) calloc(1, sizeof(GENERAL_TREE));
-    if(newGeneralNode)
+    GENERAL_TREE * newNodePtr = (GENERAL_TREE *) malloc(sizeof(GENERAL_TREE));
+    if(newNodePtr)
     {
-        newGeneralNode->data = data;
-        newGeneralNode->left = NULL;
-        newGeneralNode->right = NULL;
+        newNodePtr->data = data;
+        newNodePtr->degree = 0;
+        newNodePtr->childHeadPtr = NULL;
     }
-    return newGeneralNode;
+    return newNodePtr;
 }
 
 /*
@@ -97,87 +94,86 @@ GENERAL_TREE * create_general_tree (int data)
 */
 bool is_general_tree_empty (GENERAL_TREE * headPtr)
 {
-    return ((headPtr) ? NO : YES);
+    return (headPtr) ? NO : YES;
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
-    Description : Calculate the size of tree pointed by headPtr.
+    Description : Return the total nodes from given general tree pointer at headPtr.
     Parameter : headPtr (In) -> Head Pointer 
-    Return :    0    --> When headPtr is NULL (No Tree present)
-                size --> Size of the Tree  (How many node present in Tree)
+    Return :    Total number of nodes
 */
-unsigned int size_of_general_tree (GENERAL_TREE * headPtr)
+unsigned int total_nodes_in_general_tree (GENERAL_TREE * headPtr)
 {
-    if(NULL == headPtr)
+    if(is_general_tree_empty(headPtr))
         return 0;
-    else
-        return (1 + size_of_general_tree(headPtr->left) + size_of_general_tree(headPtr->right));
+
+    int i;
+    int totalNode = 1;
+    for(i=0; i<headPtr->degree; i++)
+    {
+        totalNode += total_nodes_in_general_tree(headPtr->childHeadPtr[i]);
+    }
+    return totalNode;
 }
 
-/*
-    Author : Jay Desai      Tester : Jay Desai
-    Status : Working
-    Description : Based on Position at pos, add new node with data in headPtr.
-    Parameter : headPtr (In) -> Head Pointer 
-                data    (In) -> Data with which new node created
-                pos     (IN) -> Belong to E_POSITION.
-    Return :    FAIL    --> When headPtr negative or Memory allocation failed
-                SUCCESS --> When new node with data is successfully added at pos of headPtr
-*/
-bool insert_in_tree (GENERAL_TREE ** headPtr, int data, E_POSITION pos)
+GENERAL_TREE * get_node_from_data (GENERAL_TREE * headPtr, int data)
+{
+    if(is_general_tree_empty(headPtr))
+        return NULL;
+    
+    if(headPtr->data == data)
+    {
+        return headPtr;
+    }
+    else
+    {
+        unsigned int i;
+        GENERAL_TREE * retPtr = NULL;
+        for(i=0; i<headPtr->degree; i++)
+        {
+            retPtr = get_node_from_data(headPtr->childHeadPtr[i], data);
+            if(retPtr)  break;
+        }
+        return retPtr;
+    }
+}
+
+bool insert_in_general_tree (GENERAL_TREE ** headPtr, unsigned int data, unsigned int parentData)
 {
     if(headPtr)
     {
-        GENERAL_TREE * newNodePtr = create_general_tree(data); 
+        GENERAL_TREE * newNodePtr = creat_general_tree(data);
         if(newNodePtr)
         {
-            switch (pos)
+            if(*headPtr)
             {
-                case POSITION_ROOT: (*headPtr) = newNodePtr;        break;
-                case POSITION_LEFT: (*headPtr)->left = newNodePtr;  break;
-                case POSITION_RIGHT:(*headPtr)->right = newNodePtr; break;
-                default: printf(" Wrong Position selected\n");      break;
+                GENERAL_TREE * parentNodePtr = get_node_from_data(*headPtr, parentData);
+                if(parentNodePtr)
+                {
+                    int prevSize = parentNodePtr->degree; 
+                    parentNodePtr->degree += 1;
+                    parentNodePtr->childHeadPtr = (GENERAL_TREE **) realloc(parentNodePtr->childHeadPtr, parentNodePtr->degree);
+                    parentNodePtr->childHeadPtr[prevSize] = newNodePtr;
+                    return 1;
+                }
+                else
+                {
+                    printf("Parent[%d] Node is not exist\n", parentData);
+                    return 0;
+                }
             }
-            return SUCCESS;
-        }
-        else
-        {
-            printf(" Memory allocation failed\n");
-            return FAIL;
+            else
+            {
+                (*headPtr) = newNodePtr;
+                return 1;
+            }
         }
     }
     else
     {
-        return FAIL;
-    }
-}
-
-/*
-    Author : Jay Desai      Tester : Jay Desai
-    Status : Working
-    Description : Check data is present in General Tree or not.
-    Parameter : headPtr (In) -> Head Pointer 
-                data    (In) -> data whose present need to check in tree 
-    Return :    NO  --> When data is not present in tree
-                YES --> When data is present in tree
-*/
-bool is_data_present_in_tree (GENERAL_TREE * headPtr, const int data)
-{
-    if(headPtr == NULL)
-        return NO;
-    else
-    {
-        int ret = NO;
-        if(data == headPtr->data)
-            return YES;
-        if(YES == (ret = is_data_present_in_tree(headPtr->left, data)))
-            return YES;
-        else if(YES == (ret = is_data_present_in_tree(headPtr->right, data)))
-            return YES;
-        else
-            return ret;
+        return 0;
     }
 }
 
@@ -187,30 +183,16 @@ bool is_data_present_in_tree (GENERAL_TREE * headPtr, const int data)
     Description : Printing in pre-order (Root->Left->Right).
     Parameter : headPtr (In) -> Head Pointer
 */
-void print_in_preorder (GENERAL_TREE * headPtr)
+void print_general_tree_in_preorder (GENERAL_TREE * headPtr)
 {
     if(is_general_tree_empty(headPtr))
         return;
-
+    
     printf("%d ", headPtr->data);
-    print_in_preorder(headPtr->left);
-    print_in_preorder(headPtr->right);
-}
-
-/*
-    Author : Jay Desai      Tester : Jay Desai
-    Status : Working
-    Description : Printing in in-order (Left->Root->Right).
-    Parameter : headPtr (In) -> Head Pointer
-*/
-void print_in_inorder (GENERAL_TREE * headPtr)
-{
-    if(is_general_tree_empty(headPtr))
-        return;
-
-    print_in_inorder(headPtr->left);
-    printf("%d ", headPtr->data);
-    print_in_inorder(headPtr->right);
+    for(unsigned int i=0; i < headPtr->degree; i++)
+    {
+        print_general_tree_in_preorder(headPtr->childHeadPtr[i]);
+    }
 }
 
 /*
@@ -219,13 +201,15 @@ void print_in_inorder (GENERAL_TREE * headPtr)
     Description : Printing in post-order (Left->Right->Root).
     Parameter : headPtr (In) -> Head Pointer
 */
-void print_in_postorder (GENERAL_TREE * headPtr)
+void print_general_tree_in_postorder (GENERAL_TREE * headPtr)
 {
     if(is_general_tree_empty(headPtr))
         return;
-
-    print_in_postorder(headPtr->left);
-    print_in_postorder(headPtr->right);
+    
+    for(unsigned int i=0; i < headPtr->degree; i++)
+    {
+        print_general_tree_in_postorder(headPtr->childHeadPtr[i]);
+    }
     printf("%d ", headPtr->data);
 }
 
@@ -237,16 +221,38 @@ void print_in_postorder (GENERAL_TREE * headPtr)
     Return :    FAIL    --> When tree is already empty
                 SUCCESS --> When tree is freeded successfully
 */
-bool delete_general_tree (GENERAL_TREE ** headPtr)
+void delete_general_tree (GENERAL_TREE ** headPtr)
 {
     if(is_general_tree_empty(*headPtr))
-        return FAIL;
+        return;
+
+    for(unsigned int i=0; i<(*headPtr)->degree; i++)
+        delete_general_tree(&((*headPtr)->childHeadPtr[i]));
+
+    DESTRUCTOR_of_GENERAL_TREE(*headPtr);
+}
+
+bool delete_node_from_general_tree (GENERAL_TREE ** headPtr, int data)
+{
+    if(is_general_tree_empty(*headPtr))
+        return NO;
+    
+    // Node found
+    if((*headPtr)->data == data)
+    {
+        delete_general_tree(headPtr);
+        return YES;
+    }
     else
     {
-        delete_general_tree(&((*headPtr)->left));
-        delete_general_tree(&((*headPtr)->right));
-        FREE_GENERAT_TREE_NODE((*headPtr));
-        return SUCCESS;
+        unsigned int i;
+        bool ret = NO;
+        for(i=0; i<(*headPtr)->degree; i++)
+        {
+            ret = delete_node_from_general_tree(&(*headPtr)->childHeadPtr[i], data);
+            if(ret) break;
+        }
+        return ret;
     }
 }
 
@@ -265,6 +271,8 @@ int get_root_node_data (GENERAL_TREE * headPtr)
     else
         return headPtr->data;
 }
+
+#if 0
 
 /*
     Author : Jay Desai      Tester : Jay Desai
@@ -352,7 +360,6 @@ void print_internal_node (GENERAL_TREE * headPtr)
         print_internal_node(headPtr->left);
     if(headPtr->right)
         print_internal_node(headPtr->right);
-
 }
 
 /*
@@ -454,3 +461,5 @@ int total_node_at_level (GENERAL_TREE * headPtr, int level)
 {
 
 }
+
+#endif

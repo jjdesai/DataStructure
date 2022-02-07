@@ -10,11 +10,11 @@
     #define YES     1
     #define NO      0
 
-    #define FREE_GENERAT_TREE_NODE(VAR) \
-        (VAL)->degree = 0;              \
-        free((VAL)->childHeadPtr);      \
-        (VAL)->childHeadPtr = NULL;     \
-        free(VAL);                      \
+    #define DESTRUCTOR_of_GENERAL_TREE(VAL) \
+        (VAL)->degree = 0;                  \
+        free((VAL)->childHeadPtr);          \
+        (VAL)->childHeadPtr = NULL;         \
+        free(VAL);                          \
         VAL = NULL;
 
     typedef unsigned char bool;
@@ -30,15 +30,17 @@
     GENERAL_TREE * creat_general_tree (int data);
 
     bool is_general_tree_empty (GENERAL_TREE * headPtr);
+    unsigned int total_nodes_in_general_tree (GENERAL_TREE * headPtr);
     
     bool insert_in_general_tree (GENERAL_TREE ** headPtr, unsigned int data, unsigned int parentData);
 
-    bool delete_general_tree (GENERAL_TREE ** headPtr);
-
     void print_general_tree_in_preorder (GENERAL_TREE * headPtr);
     void print_general_tree_in_postorder (GENERAL_TREE * headPtr);
-    
 
+    void delete_general_tree (GENERAL_TREE ** headPtr);
+    bool delete_node_from_general_tree (GENERAL_TREE ** headPtr, int data);
+    
+    int get_root_node_data (GENERAL_TREE * headPtr);
 
 #endif
 

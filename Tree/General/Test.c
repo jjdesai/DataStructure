@@ -28,18 +28,6 @@ bool is_general_tree_empty (GENERAL_TREE * headPtr)
     return (headPtr) ? NO : YES;
 }
 
-GENERAL_TREE * creat_general_tree (int data)
-{
-    GENERAL_TREE * newNodePtr = (GENERAL_TREE *) malloc(sizeof(GENERAL_TREE));
-    if(newNodePtr)
-    {
-        newNodePtr->data = data;
-        newNodePtr->degree = 0;
-        newNodePtr->childHeadPtr = NULL;
-    }
-    return newNodePtr;
-}
-
 GENERAL_TREE * get_parent_node (GENERAL_TREE * headPtr, int parentData)
 {
     if(is_general_tree_empty(headPtr))
