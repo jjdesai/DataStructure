@@ -156,24 +156,24 @@ bool insert_in_general_tree (GENERAL_TREE ** headPtr, unsigned int data, unsigne
                     parentNodePtr->degree += 1;
                     parentNodePtr->childHeadPtr = (GENERAL_TREE **) realloc(parentNodePtr->childHeadPtr, parentNodePtr->degree);
                     parentNodePtr->childHeadPtr[prevSize] = newNodePtr;
-                    return 1;
+                    return YES;
                 }
                 else
                 {
                     printf("Parent[%d] Node is not exist\n", parentData);
-                    return 0;
+                    return NO;
                 }
             }
             else
             {
                 (*headPtr) = newNodePtr;
-                return 1;
+                return YES;
             }
         }
     }
     else
     {
-        return 0;
+        return NO;
     }
 }
 
@@ -234,26 +234,31 @@ void delete_general_tree (GENERAL_TREE ** headPtr)
 
 bool delete_node_from_general_tree (GENERAL_TREE ** headPtr, int data)
 {
-    if(is_general_tree_empty(*headPtr))
-        return NO;
-    
-    // Node found
-    if((*headPtr)->data == data)
+    if(headPtr)
     {
-        delete_general_tree(headPtr);
-        return YES;
+        if(is_general_tree_empty(*headPtr))
+            return NO;
+        
+        // Node found
+        if((*headPtr)->data == data)
+        {
+            delete_general_tree(headPtr);
+            return YES;
+        }
+        else
+        {
+            unsigned int i;
+            bool ret = NO;
+            for(i=0; i<(*headPtr)->degree; i++)
+            {
+                ret = delete_node_from_general_tree(&(*headPtr)->childHeadPtr[i], data);
+                if(ret) break;
+            }
+            return ret;
+        }
     }
     else
-    {
-        unsigned int i;
-        bool ret = NO;
-        for(i=0; i<(*headPtr)->degree; i++)
-        {
-            ret = delete_node_from_general_tree(&(*headPtr)->childHeadPtr[i], data);
-            if(ret) break;
-        }
-        return ret;
-    }
+        return NO;
 }
 
 /*
