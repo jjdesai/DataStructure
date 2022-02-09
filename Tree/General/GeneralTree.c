@@ -6,6 +6,7 @@
 #include "GeneralTree.h"
 
 GENERAL_TREE * get_node_from_data (GENERAL_TREE * headPtr, int parentData);
+GENERAL_TREE * get_parent_node_of_data(GENERAL_TREE * headPtr, int data);
 
 /*
                             0
@@ -57,6 +58,9 @@ int main ()
     printf("\n");
 
     printf(" Total Size of General Tree : [%d]\n", total_nodes_in_general_tree(headPtr));
+    printf(" Parent of 22 is [%d]\n", get_parent_of_data(headPtr, 22));
+    printf(" Parent of 32 is [%d]\n", get_parent_of_data(headPtr, 32));
+    printf(" Parent of 34 is [%d]\n", get_parent_of_data(headPtr, 34));
 
     delete_general_tree(&headPtr);
 
@@ -216,7 +220,7 @@ void print_general_tree_in_postorder (GENERAL_TREE * headPtr)
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
-    Description : Delete the whole tree below headPtr.
+    Description : Delete the whole general tree pointed by headPtr.
     Parameter : headPtr (In) : Head Pointer  
     Return :    FAIL    --> When tree is already empty
                 SUCCESS --> When tree is freeded successfully
@@ -232,23 +236,33 @@ void delete_general_tree (GENERAL_TREE ** headPtr)
     DESTRUCTOR_of_GENERAL_TREE(*headPtr);
 }
 
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Delete the particular node/sub-tree with data from general tree pointed by headPtr.
+    Parameter : headPtr (In) : Head Pointer
+                data (In)    : Node/Sub-Tree which needs to be delete 
+    Return :    FAIL    --> When General Tree is already empty/ does not have node with data 
+                SUCCESS --> When Node/Sub-Tree is freeded successfully
+*/
 bool delete_node_from_general_tree (GENERAL_TREE ** headPtr, int data)
 {
     if(headPtr)
     {
         if(is_general_tree_empty(*headPtr))
-            return NO;
+            return FAIL;
         
         // Node found
         if((*headPtr)->data == data)
         {
             delete_general_tree(headPtr);
-            return YES;
+            return SUCCESS;
         }
+        // Node did not found. Have to travel in General Tree
         else
         {
             unsigned int i;
-            bool ret = NO;
+            bool ret = FAIL;
             for(i=0; i<(*headPtr)->degree; i++)
             {
                 ret = delete_node_from_general_tree(&(*headPtr)->childHeadPtr[i], data);
@@ -258,7 +272,7 @@ bool delete_node_from_general_tree (GENERAL_TREE ** headPtr, int data)
         }
     }
     else
-        return NO;
+        return FAIL;
 }
 
 /*
@@ -275,6 +289,48 @@ int get_root_node_data (GENERAL_TREE * headPtr)
         return -1;
     else
         return headPtr->data;
+}
+
+GENERAL_TREE * get_parent_node_of_data(GENERAL_TREE * headPtr, int data)
+{
+    if(is_general_tree_empty(headPtr))
+        return NULL;
+    else
+    {
+        GENERAL_TREE * tmpNodePtr = NULL;
+        for(unsigned int i=0; i<headPtr->degree; i++)
+        {
+            if(!headPtr->childHeadPtr[i])
+            {
+                printf("Unexpected...[%d]\n", i);
+                continue;                   // This is Error due to deleting the node. Delete node is not well handled
+            }
+            if(headPtr->childHeadPtr[i]->data == data)
+            {
+                printf("Helo\n");
+                return headPtr;
+            }
+            else
+            {
+                if(NULL != (tmpNodePtr = get_parent_node_of_data(headPtr->childHeadPtr[i], data)))
+                {
+                    printf("Returing...\n");
+                    return tmpNodePtr;
+                }
+            }
+        }
+        printf("Return..\n");
+        return NULL;
+    }
+}
+
+int get_parent_of_data (GENERAL_TREE * headPtr, int data)
+{
+    GENERAL_TREE * tmpNodePtr = get_parent_node_of_data(headPtr, data);
+    if(tmpNodePtr)
+        return tmpNodePtr->data;
+    else
+        return -1;
 }
 
 #if 0

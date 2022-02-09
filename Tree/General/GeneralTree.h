@@ -41,6 +41,7 @@
     bool delete_node_from_general_tree (GENERAL_TREE ** headPtr, int data);
     
     int get_root_node_data (GENERAL_TREE * headPtr);
+    int get_parent_of_data (GENERAL_TREE * headPtr, int data);
 
 #endif
 
