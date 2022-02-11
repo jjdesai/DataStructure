@@ -47,6 +47,14 @@ int main ()
     print_general_tree_in_preorder(headPtr);
     printf("\n");
 
+    printf(" Internal Node : ");
+    print_internal_node_of_general_tree(headPtr);
+    printf("\n");
+
+    printf(" Leaf Node : ");
+    print_leaf_node_of_general_tree(headPtr);
+    printf("\n");
+
     delete_node_from_general_tree(&headPtr, 21);
 
     printf(" General Tree in Pre-Order : ");
@@ -122,6 +130,9 @@ unsigned int total_nodes_in_general_tree (GENERAL_TREE * headPtr)
     return totalNode;
 }
 
+/*
+Helper Function of insert_in_general_tree()
+*/
 GENERAL_TREE * get_node_from_data (GENERAL_TREE * headPtr, int data)
 {
     if(is_general_tree_empty(headPtr))
@@ -144,6 +155,15 @@ GENERAL_TREE * get_node_from_data (GENERAL_TREE * headPtr, int data)
     }
 }
 
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Insert a new node with data below parentData at General Tree pointer by headPtr.
+    Parameter : headPtr (In) -> Head Pointer
+                data (In) -> Child data with which new node will create
+                parentData (In) -> Parent data under which new node will create
+    Return :    Total number of nodes
+*/
 bool insert_in_general_tree (GENERAL_TREE ** headPtr, unsigned int data, unsigned int parentData)
 {
     if(headPtr)
@@ -296,6 +316,9 @@ int get_root_node_data (GENERAL_TREE * headPtr)
         return headPtr->data;
 }
 
+/*
+Helper Function of get_parent_of_data()
+*/
 GENERAL_TREE * get_parent_node_of_data(GENERAL_TREE * headPtr, int childData)
 {
     if(is_general_tree_empty(headPtr))
@@ -337,6 +360,48 @@ int get_parent_of_data (GENERAL_TREE * headPtr, int childData)
         return tmpNodePtr->data;
     else
         return -1;
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Print the internel nodes (Internal node is the one who has atleast one child).
+    Parameter : headPtr (In) : Head Pointer  
+    Return :    Print the internal nodes 
+*/
+void print_internal_node_of_general_tree (GENERAL_TREE * headPtr)
+{
+    if(is_general_tree_empty(headPtr))
+        return;
+
+    if(headPtr->degree != 0)
+        printf("%d ", headPtr->data);
+
+    for(unsigned int i=0; i < headPtr->degree; i++)
+    {
+        print_internal_node_of_general_tree(headPtr->childHeadPtr[i]);
+    }
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Print the leaf nodes (Leaf node is the one who has no child).
+    Parameter : headPtr (In) : Head Pointer  
+    Return :    Print the leaf nodes 
+*/
+void print_leaf_node_of_general_tree (GENERAL_TREE * headPtr)
+{
+    if(is_general_tree_empty(headPtr))
+        return;
+
+    if(headPtr->degree == 0)
+        printf("%d ", headPtr->data);
+
+    for(unsigned int i=0; i < headPtr->degree; i++)
+    {
+        print_leaf_node_of_general_tree(headPtr->childHeadPtr[i]);
+    }
 }
 
 #if 0

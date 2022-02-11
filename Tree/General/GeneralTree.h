@@ -42,6 +42,8 @@
     
     int get_root_node_data (GENERAL_TREE * headPtr);
     int get_parent_of_data (GENERAL_TREE * headPtr, int childData);
+    void print_internal_node_of_general_tree (GENERAL_TREE * headPtr);
+    void print_leaf_node_of_general_tree (GENERAL_TREE * headPtr);
 
 #endif
 
