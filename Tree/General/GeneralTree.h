@@ -44,6 +44,10 @@
     int get_parent_of_data (GENERAL_TREE * headPtr, int childData);
     void print_internal_node_of_general_tree (GENERAL_TREE * headPtr);
     void print_leaf_node_of_general_tree (GENERAL_TREE * headPtr);
+    bool print_ancestor_of_general_tree (GENERAL_TREE * headPtr, int data);
+    bool print_descendant_of_general_tree (GENERAL_TREE * headPtr, int data);
+
+    unsigned int get_height_of_general_tree (GENERAL_TREE * headPtr);
 
 #endif
 
