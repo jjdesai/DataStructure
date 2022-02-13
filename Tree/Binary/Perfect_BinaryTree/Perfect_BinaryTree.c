@@ -40,6 +40,9 @@ int main(int argc, char ** argv)
     headPtr->right->right->left = create_binary_tree(140);
     headPtr->right->right->right = create_binary_tree(150);
 
+    lowest_common_ancestor_in_binary_tree(headPtr, 50, 90);
+    lowest_common_ancestor_in_binary_tree(headPtr, 50, 100);
+
     print_my_binary_tree(headPtr);
 
     printf(" Total no of Node : [%lu]\n", total_node_in_perfect_binary_tree(headPtr));

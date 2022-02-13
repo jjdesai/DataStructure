@@ -43,6 +43,8 @@ int main ()
     insert_in_general_tree(&headPtr, 32, 3);
     insert_in_general_tree(&headPtr, 33, 3);
 
+    insert_in_general_tree(&headPtr, 311, 31);
+
     printf(" General Tree in Pre-Order : ");
     print_general_tree_in_preorder(headPtr);
     printf("\n");
@@ -62,6 +64,8 @@ int main ()
     printf(" Descendant of 1 is : ");
     print_descendant_of_general_tree(headPtr, 1);
     printf("\n");
+
+    printf(" Height of General Tree : [%d]\n", get_height_of_general_tree(headPtr));
 
     delete_node_from_general_tree(&headPtr, 21);
 
@@ -480,16 +484,36 @@ bool print_descendant_of_general_tree (GENERAL_TREE * headPtr, int data)
     Return :    0 -> NULL Tree
                 Height of the Binary Tree 
 */
-unsigned int get_height_of_general_tree (GENERAL_TREE * headPtr)
+unsigned int get_height_of_general_tree_r (GENERAL_TREE * headPtr, int level)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_general_tree_empty(headPtr))
+    {
         return 0;
+    }
     else
     {
-        int leftHeight = get_height_of_binary_tree(headPtr->left);
-        int rightHeight = get_height_of_binary_tree(headPtr->right);
-        return (leftHeight > rightHeight) ? (leftHeight+1) : (rightHeight+1);
+        if(headPtr->degree == 0)
+        {
+            return level;
+            printf(" Data[%d] At level[%d]\n", headPtr->data, level);
+        }
+
+        static unsigned int max = 0; 
+        for(unsigned int i=0; i<(headPtr->degree); i++)
+        {
+            int ret = get_height_of_general_tree_r(headPtr->childHeadPtr[i], level+1);
+            printf("Ret : %d\n", ret);
+            if(max < ret)
+                max = ret;
+        }
+        
+        return max;
     }
+}
+
+unsigned int get_height_of_general_tree (GENERAL_TREE * headPtr)
+{
+    return get_height_of_general_tree_r(headPtr, 1);
 }
 
 #if 0

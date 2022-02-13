@@ -345,3 +345,76 @@ unsigned int get_height_of_binary_tree (BINARY_TREE * headPtr)
         return (leftHeight > rightHeight) ? (leftHeight+1) : (rightHeight+1);
     }
 }
+
+BINARY_TREE * find_data_node_from_binary_tree (BINARY_TREE * headPtr, unsigned int data)
+{
+    if(is_binary_tree_empty(headPtr))
+        return NULL;
+    else
+    {
+        if(headPtr->data == data)
+            return headPtr;
+        BINARY_TREE * retPtr = find_data_node_from_binary_tree(headPtr->left, data);
+        if(retPtr)
+            return retPtr;
+        retPtr = find_data_node_from_binary_tree(headPtr->right, data);
+        if(retPtr)
+            return retPtr;
+    }
+}
+
+BINARY_TREE * lowest_common_ancestor (BINARY_TREE * headPtr, BINARY_TREE * data1NodePtr, BINARY_TREE * data2NodePtr)
+{
+    if((headPtr == NULL) || (headPtr == data1NodePtr) || (headPtr == data2NodePtr))
+        return headPtr;
+    else
+    {
+        BINARY_TREE * leftPtr = lowest_common_ancestor(headPtr->left, data1NodePtr, data2NodePtr);
+        BINARY_TREE * rightPtr = lowest_common_ancestor(headPtr->right, data1NodePtr, data2NodePtr);
+        if(leftPtr == NULL)
+            return rightPtr;
+        else if(rightPtr == NULL)
+            return leftPtr;
+        else
+        {
+            // Both Left and Right is not NULL, we've found our result
+            return headPtr;
+        }
+    }
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : Return the Lowest Common Ancestor between data1 & data2 from given binary tree headPtr.
+    Parameter : headPtr (In) : Head Pointer
+                data1 (In) & data2 (In) -> data1 & data2 whose LCA needs to find out
+    Return :    -1 -> Negative Case
+                Return the data of node which is the Lowest Common Ancestor 
+*/
+int lowest_common_ancestor_in_binary_tree (BINARY_TREE * headPtr, unsigned int data1, unsigned int data2)
+{
+    if(is_binary_tree_empty(headPtr))
+        return -1;
+    else
+    {
+        BINARY_TREE * data1NodePtr = find_data_node_from_binary_tree(headPtr, data1);
+        BINARY_TREE * data2NodePtr = find_data_node_from_binary_tree(headPtr, data2);
+
+        if(data1NodePtr && data2NodePtr)
+        {
+            BINARY_TREE * lcaPtr = lowest_common_ancestor(headPtr, data1NodePtr, data2NodePtr);
+            if(lcaPtr)
+            {
+                printf(" Lowest Common Ancestor between [%d] & [%d] is [%d]\n", data1, data2, lcaPtr->data);
+                return lcaPtr->data;
+            }
+            return lcaPtr;
+        }
+        else
+        {
+            printf(" Data [%d] or [%d] is not present in the Given Binary Tree\n", data1, data2);
+            return -1;
+        }
+    }
+}

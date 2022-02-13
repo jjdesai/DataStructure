@@ -87,20 +87,22 @@
     bool print_ancestor                     (BINARY_TREE * headPtr, int data);     // Root to data path
     void print_descendant                   (BINARY_TREE * headPtr, int data);     // After data path
     unsigned int get_height_of_binary_tree  (BINARY_TREE * headPtr);
-    int total_node_at_level                 (BINARY_TREE * headPtr, int level);
 
-    void print_bottom_view_of_binary_tree      (BINARY_TREE * headPtr);
-    void print_top_view_of_binary_tree         (BINARY_TREE * headPtr);
-    void print_left_side_view_of_binary_tree   (BINARY_TREE * headPtr);
-    void print_right_side_view_of_binary_tree  (BINARY_TREE * headPtr);
+    void print_bottom_view_of_binary_tree      (BINARY_TREE * headPtr);     // NOTE : Vertical Order Traversal will require 
+    void print_top_view_of_binary_tree         (BINARY_TREE * headPtr);     // NOTE : Vertical Order Traversal will require
+    void print_left_side_view_of_binary_tree   (BINARY_TREE * headPtr);     // NOTE : Level Order Traversal will require
+    void print_right_side_view_of_binary_tree  (BINARY_TREE * headPtr);     // NOTE : Level Order Traversal will require
 
     void print_all_node_at_level_in_binary_tree (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
-    int total_node_at_level_in_binaryl_tree     (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    int total_node_at_level_in_binary_tree      (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
 
     // https://www.sanfoundry.com/c-program-find-lowest-common-ancestor/
-    int lowest_common_ancestor                  (BINARY_TREE * headPtr, unsigned int data1, unsigned int data2);
+    int lowest_common_ancestor_in_binary_tree   (BINARY_TREE * headPtr, unsigned int data1, unsigned int data2);
 
-    https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#:~:text=The%20left%20boundary%20is%20defined,left%20boundary%20or%20right%20boundary.
+    // https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#:~:text=The%20left%20boundary%20is%20defined,left%20boundary%20or%20right%20boundary.
     void print_boundry_of_binary_tree           (BINARY_TREE * headPtr);
+
+    // https://www.youtube.com/watch?v=WszrfSwMz58
+    void maximum_path_sum_of_binary_tree        (BINARY_TREE * headPtr, int data1, int data2);
 
 #endif // _BINARY_TREE_COMMON_H_
