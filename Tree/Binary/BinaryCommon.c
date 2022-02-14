@@ -409,7 +409,7 @@ int lowest_common_ancestor_in_binary_tree (BINARY_TREE * headPtr, unsigned int d
                 printf(" Lowest Common Ancestor between [%d] & [%d] is [%d]\n", data1, data2, lcaPtr->data);
                 return lcaPtr->data;
             }
-            return lcaPtr;
+            return -1;
         }
         else
         {
