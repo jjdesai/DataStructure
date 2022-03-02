@@ -26,9 +26,9 @@
                   Figure-3 is not a Complete Binary Tree as there is no left of 30 but it has right
     */
 
-    unsigned int total_node_in_complete_binary_tree (BINARY_TREE * headPtr);
-    int is_tree_a_complete_tree (BINARY_TREE * headPtr);
+    unsigned int total_node_in_complete_binary_tree (BINARY_TREE * rootPtr);
+    int is_tree_a_complete_tree (BINARY_TREE * rootPtr);
 
-    int delete_node_from_complete_binary_tree (BINARY_TREE * headPtr, int data);
+    int delete_node_from_complete_binary_tree (BINARY_TREE * rootPtr, int data);
 
 #endif // _COMPLETE_BINARY_TREE_H_

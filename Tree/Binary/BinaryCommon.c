@@ -8,7 +8,7 @@
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Create a new node and return without checking the allocation.
-    Parameter : headPtr (In) -> Head Pointer 
+    Parameter : rootPtr (In) -> Head Pointer 
     Return :    New Node
 */
 BINARY_TREE * create_binary_tree (int data)
@@ -27,53 +27,53 @@ BINARY_TREE * create_binary_tree (int data)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Check whether Binary Tree is empty or not.
-    Parameter : headPtr (In) -> Head Pointer 
-    Return :    NO  --> When headPtr is NON-NULL
-                YES --> When headPtr is NULL
+    Parameter : rootPtr (In) -> Head Pointer 
+    Return :    NO  --> When rootPtr is NON-NULL
+                YES --> When rootPtr is NULL
 */
-bool is_binary_tree_empty (BINARY_TREE * headPtr)
+bool is_binary_tree_empty (BINARY_TREE * rootPtr)
 {
-    return ((headPtr) ? NO : YES);
+    return ((rootPtr) ? NO : YES);
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Return the total number nodes in Binary Tree .
-    Parameter : headPtr (In) -> Head Pointer 
-    Return :    0    --> When headPtr is NULL (No Binary Tree present)
+    Parameter : rootPtr (In) -> Head Pointer 
+    Return :    0    --> When rootPtr is NULL (No Binary Tree present)
                 total number of nodes present in Binary Tree
     Time Complexity : O(n)  -> Travel through each node
     Space Complexity : O(h) -> h is the height of the Binary Tree
 
 */
-unsigned int total_node_in_binary_tree (BINARY_TREE * headPtr)
+unsigned int total_node_in_binary_tree (BINARY_TREE * rootPtr)
 {
-    if(NULL == headPtr)
+    if(NULL == rootPtr)
         return 0;
     else
         return ( 1                                           + 
-                 total_node_in_binary_tree(headPtr->left)    +
-                 total_node_in_binary_tree(headPtr->right) );
+                 total_node_in_binary_tree(rootPtr->left)    +
+                 total_node_in_binary_tree(rootPtr->right) );
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
-    Description : Delete the whole tree below headPtr.
-    Parameter : headPtr (In) : Head Pointer  
+    Description : Delete the whole tree below rootPtr.
+    Parameter : rootPtr (In) : Head Pointer  
     Return :    FAIL    --> When binary tree is already empty
                 SUCCESS --> When binary tree is freeded successfully
 */
-bool delete_binary_tree (BINARY_TREE ** headPtr)
+bool delete_binary_tree (BINARY_TREE ** rootPtr)
 {
-    if(is_binary_tree_empty(*headPtr))
+    if(is_binary_tree_empty(*rootPtr))
         return FAIL;
     else
     {
-        delete_binary_tree(&((*headPtr)->left));
-        delete_binary_tree(&((*headPtr)->right));
-        FREE_BINARY_TREE_NODE((*headPtr));
+        delete_binary_tree(&((*rootPtr)->left));
+        delete_binary_tree(&((*rootPtr)->right));
+        FREE_BINARY_TREE_NODE((*rootPtr));
         return SUCCESS;
     }
 }
@@ -82,18 +82,18 @@ bool delete_binary_tree (BINARY_TREE ** headPtr)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Return the height of Binary Tree.
-    Parameter : headPtr (In) : Head Pointer
+    Parameter : rootPtr (In) : Head Pointer
     Return :    0 -> When Binary Tree is NULL
                 Height of the Binary Tree 
 */
-unsigned int get_binary_tree_height (BINARY_TREE * headPtr)
+unsigned int get_binary_tree_height (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return 0;
     else
     {
-        int leftHeight = get_binary_tree_height(headPtr->left);
-        int rightHeight = get_binary_tree_height(headPtr->right);
+        int leftHeight = get_binary_tree_height(rootPtr->left);
+        int rightHeight = get_binary_tree_height(rootPtr->right);
         return (leftHeight > rightHeight) ? (leftHeight+1) : (rightHeight+1);
     }
 }
@@ -102,91 +102,91 @@ unsigned int get_binary_tree_height (BINARY_TREE * headPtr)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Printing in pre-order (Root->Left->Right).
-    Parameter : headPtr (In) -> Head Pointer
+    Parameter : rootPtr (In) -> Head Pointer
 */
-void print_in_preorder (BINARY_TREE * headPtr)
+void print_in_preorder (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return;
 
-    printf("%d ", headPtr->data);
-    print_in_preorder(headPtr->left);
-    print_in_preorder(headPtr->right);
+    printf("%d ", rootPtr->data);
+    print_in_preorder(rootPtr->left);
+    print_in_preorder(rootPtr->right);
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Printing in in-order (Left->Root->Right).
-    Parameter : headPtr (In) -> Head Pointer
+    Parameter : rootPtr (In) -> Head Pointer
 */
-void print_in_inorder (BINARY_TREE * headPtr)
+void print_in_inorder (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return;
 
-    print_in_inorder(headPtr->left);
-    printf("%d ", headPtr->data);
-    print_in_inorder(headPtr->right);
+    print_in_inorder(rootPtr->left);
+    printf("%d ", rootPtr->data);
+    print_in_inorder(rootPtr->right);
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Printing in post-order (Left->Right->Root).
-    Parameter : headPtr (In) -> Head Pointer
+    Parameter : rootPtr (In) -> Head Pointer
 */
-void print_in_postorder (BINARY_TREE * headPtr)
+void print_in_postorder (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return;
 
-    print_in_postorder(headPtr->left);
-    print_in_postorder(headPtr->right);
-    printf("%d ", headPtr->data);
+    print_in_postorder(rootPtr->left);
+    print_in_postorder(rootPtr->right);
+    printf("%d ", rootPtr->data);
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Return the root node data.
-    Parameter : headPtr (In) : Head Pointer  
+    Parameter : rootPtr (In) : Head Pointer  
     Return :    -1    --> When Binary Tree is empty
                 Data  --> Return the first node data
 */
-int get_root_node_data (BINARY_TREE * headPtr)
+int get_root_node_data (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return -1;
     else
-        return headPtr->data;
+        return rootPtr->data;
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Return the sibling.
-    Parameter : headPtr (In) : Head Pointer
+    Parameter : rootPtr (In) : Head Pointer
                 data (In)    : Data whose sibling needs to find
     Return :    -1    --> When sibling is not found
                 Sibling data --> Return sibling data 
 */
-int get_siblings (BINARY_TREE * headPtr, int data)
+int get_siblings (BINARY_TREE * rootPtr, int data)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return -1;
     else
     {
-        if(headPtr->left && headPtr->right)
+        if(rootPtr->left && rootPtr->right)
         {
             int ret = -1; 
-            if(headPtr->left->data == data)
-                return headPtr->right->data;
-            else if(headPtr->right->data == data)
-                return headPtr->left->data;
-            else if(-1 != (ret = get_siblings(headPtr->left, data)))
+            if(rootPtr->left->data == data)
+                return rootPtr->right->data;
+            else if(rootPtr->right->data == data)
+                return rootPtr->left->data;
+            else if(-1 != (ret = get_siblings(rootPtr->left, data)))
                 return ret;
-            else if(-1 != (ret = get_siblings(headPtr->right, data)))
+            else if(-1 != (ret = get_siblings(rootPtr->right, data)))
                 return ret;
             else
                 return -1;
@@ -200,26 +200,26 @@ int get_siblings (BINARY_TREE * headPtr, int data)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Return the sibling.
-    Parameter : headPtr (In) : Head Pointer
+    Parameter : rootPtr (In) : Head Pointer
     Return :    -1    --> When sibling is not found
                 sibling data --> Return sibling data 
 */
-bool is_sibling (BINARY_TREE * headPtr, int data1, int data2)
+bool is_sibling (BINARY_TREE * rootPtr, int data1, int data2)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return NO;
     else
     {
-        if(headPtr->left && headPtr->right)
+        if(rootPtr->left && rootPtr->right)
         {
-            if( ((headPtr->left->data == data1) && (headPtr->right->data == data2)) ||
-                ((headPtr->right->data == data1) && (headPtr->left->data == data2))   )
+            if( ((rootPtr->left->data == data1) && (rootPtr->right->data == data2)) ||
+                ((rootPtr->right->data == data1) && (rootPtr->left->data == data2))   )
             {
                 return YES;
             }
-            if(YES == is_sibling(headPtr->left, data1, data2))
+            if(YES == is_sibling(rootPtr->left, data1, data2))
                 return YES;
-            else if(YES == is_sibling(headPtr->right, data1, data2))
+            else if(YES == is_sibling(rootPtr->right, data1, data2))
                 return YES;
             else
                 return NO;
@@ -233,21 +233,21 @@ bool is_sibling (BINARY_TREE * headPtr, int data1, int data2)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Print the internel nodes (Internal node is the one who has atleast one child).
-    Parameter : headPtr (In) : Head Pointer  
+    Parameter : rootPtr (In) : Head Pointer  
     Return :    Print the internal nodes 
 */
-void print_internal_node (BINARY_TREE * headPtr)
+void print_internal_node (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return;
 
-    if(headPtr->left || headPtr->right)
-        printf("%d ", headPtr->data);
+    if(rootPtr->left || rootPtr->right)
+        printf("%d ", rootPtr->data);
 
-    if(headPtr->left)
-        print_internal_node(headPtr->left);
-    if(headPtr->right)
-        print_internal_node(headPtr->right);
+    if(rootPtr->left)
+        print_internal_node(rootPtr->left);
+    if(rootPtr->right)
+        print_internal_node(rootPtr->right);
 
 }
 
@@ -255,47 +255,47 @@ void print_internal_node (BINARY_TREE * headPtr)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Print the leaf nodes (Leaf node is the one who has no child).
-    Parameter : headPtr (In) : Head Pointer  
+    Parameter : rootPtr (In) : Head Pointer  
     Return :    Print the leaf nodes 
 */
-void print_leaf_node (BINARY_TREE * headPtr)
+void print_leaf_node (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return;
 
-    if( (NULL == headPtr->left) &&
-        (NULL == headPtr->right) )
-        printf("%d ", headPtr->data);
+    if( (NULL == rootPtr->left) &&
+        (NULL == rootPtr->right) )
+        printf("%d ", rootPtr->data);
 
-    if(headPtr->left)
-        print_leaf_node(headPtr->left);
-    if(headPtr->right)
-        print_leaf_node(headPtr->right);
+    if(rootPtr->left)
+        print_leaf_node(rootPtr->left);
+    if(rootPtr->right)
+        print_leaf_node(rootPtr->right);
 }
 
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Print the ancestors (Path to data).
-    Parameter : headPtr (In) : Head Pointer
+    Parameter : rootPtr (In) : Head Pointer
                 data (In)    : Data till which path needs to print
     Return :    Print the ancestor 
 */
-bool print_ancestor (BINARY_TREE * headPtr, int data)
+bool print_ancestor (BINARY_TREE * rootPtr, int data)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return NO;
 
-    if(data == headPtr->data)
+    if(data == rootPtr->data)
     {
-        printf("%d ", headPtr->data);
+        printf("%d ", rootPtr->data);
         return YES;
     }
 
-    if( print_ancestor(headPtr->left, data) ||
-        print_ancestor(headPtr->right, data) )
+    if( print_ancestor(rootPtr->left, data) ||
+        print_ancestor(rootPtr->right, data) )
     {
-        printf("%d ", headPtr->data);
+        printf("%d ", rootPtr->data);
         return YES;
     }
     else
@@ -306,23 +306,23 @@ bool print_ancestor (BINARY_TREE * headPtr, int data)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Print the descendant (Path after data).
-    Parameter : headPtr (In) : Head Pointer
+    Parameter : rootPtr (In) : Head Pointer
                 data (In)    : Data after which path needs to print
     Return :    Print the descendants 
 */
-void print_descendant (BINARY_TREE * headPtr, int data)
+void print_descendant (BINARY_TREE * rootPtr, int data)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return;
     
-    if(headPtr->data == data)
+    if(rootPtr->data == data)
     {
-        print_in_inorder(headPtr);
+        print_in_inorder(rootPtr);
     }
     else
     {
-        print_descendant(headPtr->left, data);
-        print_descendant(headPtr->right, data);
+        print_descendant(rootPtr->left, data);
+        print_descendant(rootPtr->right, data);
     }
 }
 
@@ -330,47 +330,47 @@ void print_descendant (BINARY_TREE * headPtr, int data)
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
     Description : Return the height.
-    Parameter : headPtr (In) : Head Pointer
+    Parameter : rootPtr (In) : Head Pointer
     Return :    0 -> NULL Tree
                 Height of the Binary Tree 
 */
-unsigned int get_height_of_binary_tree (BINARY_TREE * headPtr)
+unsigned int get_height_of_binary_tree (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return 0;
     else
     {
-        int leftHeight = get_height_of_binary_tree(headPtr->left);
-        int rightHeight = get_height_of_binary_tree(headPtr->right);
+        int leftHeight = get_height_of_binary_tree(rootPtr->left);
+        int rightHeight = get_height_of_binary_tree(rootPtr->right);
         return (leftHeight > rightHeight) ? (leftHeight+1) : (rightHeight+1);
     }
 }
 
-BINARY_TREE * find_data_node_from_binary_tree (BINARY_TREE * headPtr, unsigned int data)
+BINARY_TREE * find_data_node_from_binary_tree (BINARY_TREE * rootPtr, unsigned int data)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return NULL;
     else
     {
-        if(headPtr->data == data)
-            return headPtr;
-        BINARY_TREE * retPtr = find_data_node_from_binary_tree(headPtr->left, data);
+        if(rootPtr->data == data)
+            return rootPtr;
+        BINARY_TREE * retPtr = find_data_node_from_binary_tree(rootPtr->left, data);
         if(retPtr)
             return retPtr;
-        retPtr = find_data_node_from_binary_tree(headPtr->right, data);
+        retPtr = find_data_node_from_binary_tree(rootPtr->right, data);
         if(retPtr)
             return retPtr;
     }
 }
 
-BINARY_TREE * lowest_common_ancestor (BINARY_TREE * headPtr, BINARY_TREE * data1NodePtr, BINARY_TREE * data2NodePtr)
+BINARY_TREE * lowest_common_ancestor (BINARY_TREE * rootPtr, BINARY_TREE * data1NodePtr, BINARY_TREE * data2NodePtr)
 {
-    if((headPtr == NULL) || (headPtr == data1NodePtr) || (headPtr == data2NodePtr))
-        return headPtr;
+    if((rootPtr == NULL) || (rootPtr == data1NodePtr) || (rootPtr == data2NodePtr))
+        return rootPtr;
     else
     {
-        BINARY_TREE * leftPtr = lowest_common_ancestor(headPtr->left, data1NodePtr, data2NodePtr);
-        BINARY_TREE * rightPtr = lowest_common_ancestor(headPtr->right, data1NodePtr, data2NodePtr);
+        BINARY_TREE * leftPtr = lowest_common_ancestor(rootPtr->left, data1NodePtr, data2NodePtr);
+        BINARY_TREE * rightPtr = lowest_common_ancestor(rootPtr->right, data1NodePtr, data2NodePtr);
         if(leftPtr == NULL)
             return rightPtr;
         else if(rightPtr == NULL)
@@ -378,7 +378,7 @@ BINARY_TREE * lowest_common_ancestor (BINARY_TREE * headPtr, BINARY_TREE * data1
         else
         {
             // Both Left and Right is not NULL, we've found our result
-            return headPtr;
+            return rootPtr;
         }
     }
 }
@@ -386,24 +386,24 @@ BINARY_TREE * lowest_common_ancestor (BINARY_TREE * headPtr, BINARY_TREE * data1
 /*
     Author : Jay Desai      Tester : Jay Desai
     Status : Working
-    Description : Return the Lowest Common Ancestor between data1 & data2 from given binary tree headPtr.
-    Parameter : headPtr (In) : Head Pointer
+    Description : Return the Lowest Common Ancestor between data1 & data2 from given binary tree rootPtr.
+    Parameter : rootPtr (In) : Head Pointer
                 data1 (In) & data2 (In) -> data1 & data2 whose LCA needs to find out
     Return :    -1 -> Negative Case
                 Return the data of node which is the Lowest Common Ancestor 
 */
-int lowest_common_ancestor_in_binary_tree (BINARY_TREE * headPtr, unsigned int data1, unsigned int data2)
+int lowest_common_ancestor_in_binary_tree (BINARY_TREE * rootPtr, unsigned int data1, unsigned int data2)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return -1;
     else
     {
-        BINARY_TREE * data1NodePtr = find_data_node_from_binary_tree(headPtr, data1);
-        BINARY_TREE * data2NodePtr = find_data_node_from_binary_tree(headPtr, data2);
+        BINARY_TREE * data1NodePtr = find_data_node_from_binary_tree(rootPtr, data1);
+        BINARY_TREE * data2NodePtr = find_data_node_from_binary_tree(rootPtr, data2);
 
         if(data1NodePtr && data2NodePtr)
         {
-            BINARY_TREE * lcaPtr = lowest_common_ancestor(headPtr, data1NodePtr, data2NodePtr);
+            BINARY_TREE * lcaPtr = lowest_common_ancestor(rootPtr, data1NodePtr, data2NodePtr);
             if(lcaPtr)
             {
                 printf(" Lowest Common Ancestor between [%d] & [%d] is [%d]\n", data1, data2, lcaPtr->data);

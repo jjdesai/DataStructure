@@ -21,14 +21,14 @@
                 Figure-3 is not a Full Binary Tree as node 30 has only one child.
     */
 
-    unsigned int total_node_in_full_binary_tree (BINARY_TREE * headPtr);
-    int is_tree_a_full_binary_tree (BINARY_TREE * headPtr);
+    unsigned int total_node_in_full_binary_tree (BINARY_TREE * rootPtr);
+    int is_tree_a_full_binary_tree (BINARY_TREE * rootPtr);
 
     // Deleting node from Full Binary Tree can be done by following method:
     // - Check the data with each node data in Full Binary Tree
     // - If node is leaf node, you can not delete particular node.
     //   (as after deleting leaf node, tree will not remain Full Binary Tree)
     // - If node is internal node, delete whole sub-tree
-    int delete_node_from_full_binary_tree (BINARY_TREE ** headPtr, int data);
+    int delete_node_from_full_binary_tree (BINARY_TREE ** rootPtr, int data);
 
 #endif // _FULL_BINARY_TREE_H_
