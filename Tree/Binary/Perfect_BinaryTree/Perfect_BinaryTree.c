@@ -19,7 +19,7 @@
 
 int main(int argc, char ** argv)
 {
-    BINARY_TREE * rootPtr = NULL, * rootPtr1 = NULL;
+    BINARY_TREE * rootPtr = NULL;
 
     rootPtr = create_binary_tree(10);
 
@@ -89,7 +89,7 @@ long unsigned int total_node_in_perfect_binary_tree (BINARY_TREE * rootPtr)
         long unsigned int totalNode = 1;
         for(int i=0; i<height; i++)
             totalNode *= 2;
-        return totalNode-1;
+        return (totalNode-1);
     }
 }
 

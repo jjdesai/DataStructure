@@ -29,25 +29,25 @@
 
     GENERAL_TREE * creat_general_tree (int data);
 
-    bool is_general_tree_empty (GENERAL_TREE * headPtr);
-    unsigned int total_nodes_in_general_tree (GENERAL_TREE * headPtr);
+    bool is_general_tree_empty (GENERAL_TREE * rootPtr);
+    unsigned int total_nodes_in_general_tree (GENERAL_TREE * rootPtr);
     
-    bool insert_in_general_tree (GENERAL_TREE ** headPtr, unsigned int data, unsigned int parentData);
+    bool insert_in_general_tree (GENERAL_TREE ** rootPtr, unsigned int data, unsigned int parentData);
 
-    void print_general_tree_in_preorder (GENERAL_TREE * headPtr);
-    void print_general_tree_in_postorder (GENERAL_TREE * headPtr);
+    void print_general_tree_in_preorder (GENERAL_TREE * rootPtr);
+    void print_general_tree_in_postorder (GENERAL_TREE * rootPtr);
 
-    void delete_general_tree (GENERAL_TREE ** headPtr);
-    bool delete_node_from_general_tree (GENERAL_TREE ** headPtr, int data);
+    void delete_general_tree (GENERAL_TREE ** rootPtr);
+    bool delete_node_from_general_tree (GENERAL_TREE ** rootPtr, int data);
     
-    int get_root_node_data (GENERAL_TREE * headPtr);
-    int get_parent_of_data (GENERAL_TREE * headPtr, int childData);
-    void print_internal_node_of_general_tree (GENERAL_TREE * headPtr);
-    void print_leaf_node_of_general_tree (GENERAL_TREE * headPtr);
-    bool print_ancestor_of_general_tree (GENERAL_TREE * headPtr, int data);
-    bool print_descendant_of_general_tree (GENERAL_TREE * headPtr, int data);
+    int get_root_node_data (GENERAL_TREE * rootPtr);
+    int get_parent_of_data (GENERAL_TREE * rootPtr, int childData);
+    void print_internal_node_of_general_tree (GENERAL_TREE * rootPtr);
+    void print_leaf_node_of_general_tree (GENERAL_TREE * rootPtr);
+    bool print_ancestor_of_general_tree (GENERAL_TREE * rootPtr, int data);
+    bool print_descendant_of_general_tree (GENERAL_TREE * rootPtr, int data);
 
-    unsigned int get_height_of_general_tree (GENERAL_TREE * headPtr);
+    unsigned int get_height_of_general_tree (GENERAL_TREE * rootPtr);
 
 #endif
 
@@ -88,38 +88,38 @@
 
     GENERAL_TREE * create_general_tree  (int data);
 
-    bool is_general_tree_empty          (GENERAL_TREE * headPtr);
-    unsigned int size_of_general_tree   (GENERAL_TREE * headPtr);
+    bool is_general_tree_empty          (GENERAL_TREE * rootPtr);
+    unsigned int size_of_general_tree   (GENERAL_TREE * rootPtr);
 
-    bool insert_in_tree         (GENERAL_TREE ** headPtr, int data, E_POSITION pos);
-    bool is_data_present_in_tree (GENERAL_TREE * headPtr, int data);
+    bool insert_in_tree         (GENERAL_TREE ** rootPtr, int data, E_POSITION pos);
+    bool is_data_present_in_tree (GENERAL_TREE * rootPtr, int data);
 
-    void print_in_preorder  (GENERAL_TREE * headPtr);
-    void print_in_inorder   (GENERAL_TREE * headPtr);
-    void print_in_postorder (GENERAL_TREE * headPtr);
-    void print_in_list      (GENERAL_TREE * headPtr);    // NOTE: Level Order Traversal will require
+    void print_in_preorder  (GENERAL_TREE * rootPtr);
+    void print_in_inorder   (GENERAL_TREE * rootPtr);
+    void print_in_postorder (GENERAL_TREE * rootPtr);
+    void print_in_list      (GENERAL_TREE * rootPtr);    // NOTE: Level Order Traversal will require
 
-    bool delete_general_tree            (GENERAL_TREE ** headPtr);
-    bool delete_node_in_general_tree    (GENERAL_TREE ** headPtr, int data);
+    bool delete_general_tree            (GENERAL_TREE ** rootPtr);
+    bool delete_node_in_general_tree    (GENERAL_TREE ** rootPtr, int data);
 
-    int get_root_node_data      (GENERAL_TREE * headPtr);
-    int get_siblings            (GENERAL_TREE * headPtr, int data);
-    bool is_sibling             (GENERAL_TREE * headPtr, int data1, int data2);
-    void print_internal_node    (GENERAL_TREE * headPtr);
-    int get_internet_node_count (GENERAL_TREE * headPtr);
-    void print_leaf_node        (GENERAL_TREE * headPtr);   // Same --> void print_external_node    (GENERAL_TREE * headPtr);
-    int get_breadth             (GENERAL_TREE * headPtr);   // The number of leaves
-    bool print_ancestor         (GENERAL_TREE * headPtr, int data);     // Root to data path
-    void print_descendant       (GENERAL_TREE * headPtr, int data);     // After data path
-    unsigned int get_height     (GENERAL_TREE * headPtr);
-    int total_node_at_level     (GENERAL_TREE * headPtr, int level);
+    int get_root_node_data      (GENERAL_TREE * rootPtr);
+    int get_siblings            (GENERAL_TREE * rootPtr, int data);
+    bool is_sibling             (GENERAL_TREE * rootPtr, int data1, int data2);
+    void print_internal_node    (GENERAL_TREE * rootPtr);
+    int get_internet_node_count (GENERAL_TREE * rootPtr);
+    void print_leaf_node        (GENERAL_TREE * rootPtr);   // Same --> void print_external_node    (GENERAL_TREE * rootPtr);
+    int get_breadth             (GENERAL_TREE * rootPtr);   // The number of leaves
+    bool print_ancestor         (GENERAL_TREE * rootPtr, int data);     // Root to data path
+    void print_descendant       (GENERAL_TREE * rootPtr, int data);     // After data path
+    unsigned int get_height     (GENERAL_TREE * rootPtr);
+    int total_node_at_level     (GENERAL_TREE * rootPtr, int level);
 
-    void print_bottom_view_of_general_tree      (GENERAL_TREE * headPtr);
-    void print_top_view_of_general_tree         (GENERAL_TREE * headPtr);
-    void print_left_side_view_of_general_tree   (GENERAL_TREE * headPtr);
-    void print_right_side_view_of_general_tree  (GENERAL_TREE * headPtr);
+    void print_bottom_view_of_general_tree      (GENERAL_TREE * rootPtr);
+    void print_top_view_of_general_tree         (GENERAL_TREE * rootPtr);
+    void print_left_side_view_of_general_tree   (GENERAL_TREE * rootPtr);
+    void print_right_side_view_of_general_tree  (GENERAL_TREE * rootPtr);
 
-    void print_all_node_at_level_in_general_tree (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
-    int total_node_at_level_in_general_tree      (GENERAL_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    void print_all_node_at_level_in_general_tree (GENERAL_TREE * rootPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    int total_node_at_level_in_general_tree      (GENERAL_TREE * rootPtr, unsigned int level); // NOTE: Level Order Traversal will require
 
 #endif // _GENERAL_TREE_H_

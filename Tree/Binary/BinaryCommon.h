@@ -65,44 +65,44 @@
 
     BINARY_TREE * create_binary_tree  (int data);
 
-    bool is_binary_tree_empty               (BINARY_TREE * headPtr);
-    unsigned int total_node_in_binary_tree  (BINARY_TREE * headPtr);
+    bool is_binary_tree_empty               (BINARY_TREE * rootPtr);
+    unsigned int total_node_in_binary_tree  (BINARY_TREE * rootPtr);
 
-    bool delete_binary_tree                 (BINARY_TREE ** headPtr);
+    bool delete_binary_tree                 (BINARY_TREE ** rootPtr);
     
-    unsigned int get_binary_tree_height     (BINARY_TREE * headPtr);
+    unsigned int get_binary_tree_height     (BINARY_TREE * rootPtr);
     
-    void print_in_preorder  (BINARY_TREE * headPtr);
-    void print_in_inorder   (BINARY_TREE * headPtr);
-    void print_in_postorder (BINARY_TREE * headPtr);
-    void print_in_list      (BINARY_TREE * headPtr);    // NOTE: Level Order Traversal will require
+    void print_in_preorder  (BINARY_TREE * rootPtr);
+    void print_in_inorder   (BINARY_TREE * rootPtr);
+    void print_in_postorder (BINARY_TREE * rootPtr);
+    void print_in_list      (BINARY_TREE * rootPtr);    // NOTE: Level Order Traversal will require
 
-    int get_root_node_data                  (BINARY_TREE * headPtr);
-    int get_siblings                        (BINARY_TREE * headPtr, int data);
-    bool is_sibling                         (BINARY_TREE * headPtr, int data1, int data2);
-    void print_internal_node                (BINARY_TREE * headPtr);
-    int get_internet_node_count             (BINARY_TREE * headPtr);
-    void print_leaf_node                    (BINARY_TREE * headPtr);   // Same --> void print_external_node    (BINARY_TREE * headPtr);
-    int get_breadth_of_binary_tree          (BINARY_TREE * headPtr);   // The number of leaves
-    bool print_ancestor                     (BINARY_TREE * headPtr, int data);     // Root to data path
-    void print_descendant                   (BINARY_TREE * headPtr, int data);     // After data path
-    unsigned int get_height_of_binary_tree  (BINARY_TREE * headPtr);
+    int get_root_node_data                  (BINARY_TREE * rootPtr);
+    int get_siblings                        (BINARY_TREE * rootPtr, int data);
+    bool is_sibling                         (BINARY_TREE * rootPtr, int data1, int data2);
+    void print_internal_node                (BINARY_TREE * rootPtr);
+    int get_internet_node_count             (BINARY_TREE * rootPtr);
+    void print_leaf_node                    (BINARY_TREE * rootPtr);   // Same --> void print_external_node    (BINARY_TREE * rootPtr);
+    int get_breadth_of_binary_tree          (BINARY_TREE * rootPtr);   // The number of leaves
+    bool print_ancestor                     (BINARY_TREE * rootPtr, int data);     // Root to data path
+    void print_descendant                   (BINARY_TREE * rootPtr, int data);     // After data path
+    unsigned int get_height_of_binary_tree  (BINARY_TREE * rootPtr);
 
-    void print_bottom_view_of_binary_tree      (BINARY_TREE * headPtr);     // NOTE : Vertical Order Traversal will require 
-    void print_top_view_of_binary_tree         (BINARY_TREE * headPtr);     // NOTE : Vertical Order Traversal will require
-    void print_left_side_view_of_binary_tree   (BINARY_TREE * headPtr);     // NOTE : Level Order Traversal will require
-    void print_right_side_view_of_binary_tree  (BINARY_TREE * headPtr);     // NOTE : Level Order Traversal will require
+    void print_bottom_view_of_binary_tree      (BINARY_TREE * rootPtr);     // NOTE : Vertical Order Traversal will require 
+    void print_top_view_of_binary_tree         (BINARY_TREE * rootPtr);     // NOTE : Vertical Order Traversal will require
+    void print_left_side_view_of_binary_tree   (BINARY_TREE * rootPtr);     // NOTE : Level Order Traversal will require
+    void print_right_side_view_of_binary_tree  (BINARY_TREE * rootPtr);     // NOTE : Level Order Traversal will require
 
-    void print_all_node_at_level_in_binary_tree (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
-    int total_node_at_level_in_binary_tree      (BINARY_TREE * headPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    void print_all_node_at_level_in_binary_tree (BINARY_TREE * rootPtr, unsigned int level); // NOTE: Level Order Traversal will require
+    int total_node_at_level_in_binary_tree      (BINARY_TREE * rootPtr, unsigned int level); // NOTE: Level Order Traversal will require
 
     // https://www.sanfoundry.com/c-program-find-lowest-common-ancestor/
-    int lowest_common_ancestor_in_binary_tree   (BINARY_TREE * headPtr, unsigned int data1, unsigned int data2);
+    int lowest_common_ancestor_in_binary_tree   (BINARY_TREE * rootPtr, unsigned int data1, unsigned int data2);
 
     // https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#:~:text=The%20left%20boundary%20is%20defined,left%20boundary%20or%20right%20boundary.
-    void print_boundry_of_binary_tree           (BINARY_TREE * headPtr);
+    void print_boundry_of_binary_tree           (BINARY_TREE * rootPtr);
 
     // https://www.youtube.com/watch?v=WszrfSwMz58
-    void maximum_path_sum_of_binary_tree        (BINARY_TREE * headPtr, int data1, int data2);
+    void maximum_path_sum_of_binary_tree        (BINARY_TREE * rootPtr, int data1, int data2);
 
 #endif // _BINARY_TREE_COMMON_H_
