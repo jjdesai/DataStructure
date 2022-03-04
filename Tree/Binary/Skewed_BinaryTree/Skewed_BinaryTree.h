@@ -34,11 +34,11 @@
         
     }TYPE_OF_SKEWED_BINARY_TREE;
 
-    unsigned int get_height_of_skewed_binary_tree (BINARY_TREE * headPtr);
-    unsigned int total_node_in_skewed_binary_tree (BINARY_TREE * headPtr);
+    unsigned int get_height_of_skewed_binary_tree (BINARY_TREE * rootPtr);
+    unsigned int total_node_in_skewed_binary_tree (BINARY_TREE * rootPtr);
 
-    bool is_tree_a_left_skewed_binary_tree   (BINARY_TREE * headPtr);
-    bool is_tree_a_right_skewed_binary_tree  (BINARY_TREE * headPtr);
-    bool is_tree_a_mix_skewed_binary_tree    (BINARY_TREE * headPtr);
+    bool is_tree_a_left_skewed_binary_tree   (BINARY_TREE * rootPtr);
+    bool is_tree_a_right_skewed_binary_tree  (BINARY_TREE * rootPtr);
+    bool is_tree_a_mix_skewed_binary_tree    (BINARY_TREE * rootPtr);
 
 #endif // _PERFECT_BINARY_TREE_H_

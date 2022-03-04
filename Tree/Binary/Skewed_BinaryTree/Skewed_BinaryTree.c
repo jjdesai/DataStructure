@@ -7,9 +7,9 @@
                                 // Chnage it to .h once makefile is ready
 #include "Skewed_BinaryTree.h"
 
-void create_left_skewed (BINARY_TREE ** headPtr);
-void create_right_skewed (BINARY_TREE ** headPtr);
-void create_mix_skewed (BINARY_TREE ** headPtr);
+void create_left_skewed (BINARY_TREE ** rootPtr);
+void create_right_skewed (BINARY_TREE ** rootPtr);
+void create_mix_skewed (BINARY_TREE ** rootPtr);
 
 int main(int argc, char ** argv)
 {
@@ -44,98 +44,98 @@ int main(int argc, char ** argv)
 
 }
 
-void create_left_skewed (BINARY_TREE ** headPtr)
+void create_left_skewed (BINARY_TREE ** rootPtr)
 {
-    if(headPtr)
+    if(rootPtr)
     {
-        *headPtr = create_binary_tree(10);                                  //         10
-        (*headPtr)->left = create_binary_tree(20);                          //       20
-        (*headPtr)->left->left = create_binary_tree(30);                    //     30
-        (*headPtr)->left->left->left = create_binary_tree(40);              //   40
-        (*headPtr)->left->left->left->left = create_binary_tree(50);        // 50
+        *rootPtr = create_binary_tree(10);                                  //         10
+        (*rootPtr)->left = create_binary_tree(20);                          //       20
+        (*rootPtr)->left->left = create_binary_tree(30);                    //     30
+        (*rootPtr)->left->left->left = create_binary_tree(40);              //   40
+        (*rootPtr)->left->left->left->left = create_binary_tree(50);        // 50
     }
 }
 
-void create_right_skewed (BINARY_TREE ** headPtr)
+void create_right_skewed (BINARY_TREE ** rootPtr)
 {
-    if(headPtr)
+    if(rootPtr)
     {
-        *headPtr = create_binary_tree(10);                                  // 10
-        (*headPtr)->right = create_binary_tree(20);                         //   20
-        (*headPtr)->right->right = create_binary_tree(30);                  //     30
-        (*headPtr)->right->right->right = create_binary_tree(40);           //       40
-        (*headPtr)->right->right->right->right = create_binary_tree(50);    //         50
+        *rootPtr = create_binary_tree(10);                                  // 10
+        (*rootPtr)->right = create_binary_tree(20);                         //   20
+        (*rootPtr)->right->right = create_binary_tree(30);                  //     30
+        (*rootPtr)->right->right->right = create_binary_tree(40);           //       40
+        (*rootPtr)->right->right->right->right = create_binary_tree(50);    //         50
     }
 }
 
-void create_mix_skewed (BINARY_TREE ** headPtr)
+void create_mix_skewed (BINARY_TREE ** rootPtr)
 {
-    if(headPtr)
+    if(rootPtr)
     {
-        *headPtr = create_binary_tree(10);                                //    10
-        (*headPtr)->right = create_binary_tree(20);                       //      20
-        (*headPtr)->right->left = create_binary_tree(30);                 //    30
-        (*headPtr)->right->left->right = create_binary_tree(40);          //      40
-        (*headPtr)->right->left->right->left = create_binary_tree(50);    //    50
+        *rootPtr = create_binary_tree(10);                                //    10
+        (*rootPtr)->right = create_binary_tree(20);                       //      20
+        (*rootPtr)->right->left = create_binary_tree(30);                 //    30
+        (*rootPtr)->right->left->right = create_binary_tree(40);          //      40
+        (*rootPtr)->right->left->right->left = create_binary_tree(50);    //    50
     }
 }
 
-unsigned int get_height_of_skewed_binary_tree (BINARY_TREE * headPtr)
+unsigned int get_height_of_skewed_binary_tree (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return 0;
     else
         return (1                                                                       + 
-                ((headPtr->left) ?  get_height_of_skewed_binary_tree(headPtr->left) :
-                                    get_height_of_skewed_binary_tree (headPtr->right)));
+                ((rootPtr->left) ?  get_height_of_skewed_binary_tree(rootPtr->left) :
+                                    get_height_of_skewed_binary_tree (rootPtr->right)));
 }
 
-unsigned int total_node_in_skewed_binary_tree (BINARY_TREE * headPtr)
+unsigned int total_node_in_skewed_binary_tree (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return 0;
     else
         return (1                                                                       + 
-                ( (headPtr->left) ?  get_height_of_skewed_binary_tree(headPtr->left) :
-                                    get_height_of_skewed_binary_tree (headPtr->right)));
+                ( (rootPtr->left) ?  get_height_of_skewed_binary_tree(rootPtr->left) :
+                                    get_height_of_skewed_binary_tree (rootPtr->right)));
 }
 
-bool is_tree_a_left_skewed_binary_tree (BINARY_TREE * headPtr)
+bool is_tree_a_left_skewed_binary_tree (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return YES;
     
-    if(headPtr->right)
+    if(rootPtr->right)
         return NO;
     else
-        return is_tree_a_left_skewed_binary_tree(headPtr->left);
+        return is_tree_a_left_skewed_binary_tree(rootPtr->left);
 }
 
-bool is_tree_a_right_skewed_binary_tree (BINARY_TREE * headPtr)
+bool is_tree_a_right_skewed_binary_tree (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return YES;
     
-    if(headPtr->left)
+    if(rootPtr->left)
         return NO;
     else
-        return is_tree_a_right_skewed_binary_tree(headPtr->right);
+        return is_tree_a_right_skewed_binary_tree(rootPtr->right);
 }
 
-bool is_tree_a_mix_skewed_binary_tree (BINARY_TREE * headPtr)
+bool is_tree_a_mix_skewed_binary_tree (BINARY_TREE * rootPtr)
 {
-    if(is_binary_tree_empty(headPtr))
+    if(is_binary_tree_empty(rootPtr))
         return YES;
 
     // Reach to leaf node, return YES
-    if((NULL == headPtr->right) && (NULL == headPtr->left))
+    if((NULL == rootPtr->right) && (NULL == rootPtr->left))
         return YES;
     // Right is present, but Left is not.
-    else if(headPtr->right && (NULL == headPtr->left))
-        return is_tree_a_mix_skewed_binary_tree(headPtr->right);
+    else if(rootPtr->right && (NULL == rootPtr->left))
+        return is_tree_a_mix_skewed_binary_tree(rootPtr->right);
     // Left is present, but Right is not.
-    else if(headPtr->left && (NULL == headPtr->right))
-        return is_tree_a_mix_skewed_binary_tree(headPtr->left);
+    else if(rootPtr->left && (NULL == rootPtr->right))
+        return is_tree_a_mix_skewed_binary_tree(rootPtr->left);
     else
         return NO;
 }
