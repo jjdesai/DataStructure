@@ -346,7 +346,81 @@ unsigned int get_height_of_binary_tree (BINARY_TREE * rootPtr)
     }
 }
 
-BINARY_TREE * find_data_node_from_binary_tree (BINARY_TREE * rootPtr, unsigned int data)
+static void print_left_side_view(BINARY_TREE * rootPtr, int currentLevel, unsigned int * maxLevelTravelPtr)
+{
+    if(is_binary_tree_empty(rootPtr))
+        return;
+    
+    if(currentLevel == (*maxLevelTravelPtr))
+    {
+        printf(" %d", rootPtr->data);
+        *maxLevelTravelPtr = (*maxLevelTravelPtr)+1;
+    }
+
+    print_left_side_view(rootPtr->left, currentLevel+1, maxLevelTravelPtr);
+    print_left_side_view(rootPtr->right, currentLevel+1, maxLevelTravelPtr);
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : This will print the left view of the binary tree pointed by rootPtr.
+    Parameter : rootPtr (In) : Head Pointer
+    Return :    void 
+*/
+void print_left_side_view_of_binary_tree (BINARY_TREE * rootPtr)
+{
+    if(rootPtr)
+    {
+        unsigned int maxLevelTravel=0;
+        printf(" Left side View :");
+        print_left_side_view(rootPtr, 0, &maxLevelTravel);
+        printf("\n");
+    }
+    else
+    {
+        printf(" RootPtr found as NULL\n");
+    }
+}
+
+static void print_right_side_view(BINARY_TREE * rootPtr, int currentLevel, unsigned int * maxLevelTravelPtr)
+{
+    if(is_binary_tree_empty(rootPtr))
+        return;
+    
+    if(currentLevel == (*maxLevelTravelPtr))
+    {
+        printf(" %d", rootPtr->data);
+        *maxLevelTravelPtr = (*maxLevelTravelPtr)+1;
+    }
+
+    print_right_side_view(rootPtr->right, currentLevel+1, maxLevelTravelPtr);
+    print_right_side_view(rootPtr->left, currentLevel+1, maxLevelTravelPtr);
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : Working
+    Description : This will print the right view of the binary tree pointed by rootPtr.
+    Parameter : rootPtr (In) : Head Pointer
+    Return :    void 
+*/
+void print_right_side_view_of_binary_tree (BINARY_TREE * rootPtr)
+{
+    if(rootPtr)
+    {
+        unsigned int maxLevelTravel=0;
+        printf(" Right side View :");
+        print_right_side_view(rootPtr, 0, &maxLevelTravel);
+        printf("\n");
+    }
+    else
+    {
+        printf(" RootPtr found as NULL\n");
+    }
+}
+
+static BINARY_TREE * find_data_node_from_binary_tree (BINARY_TREE * rootPtr, unsigned int data)
 {
     if(is_binary_tree_empty(rootPtr))
         return NULL;
@@ -363,7 +437,7 @@ BINARY_TREE * find_data_node_from_binary_tree (BINARY_TREE * rootPtr, unsigned i
     }
 }
 
-BINARY_TREE * lowest_common_ancestor (BINARY_TREE * rootPtr, BINARY_TREE * data1NodePtr, BINARY_TREE * data2NodePtr)
+static BINARY_TREE * lowest_common_ancestor (BINARY_TREE * rootPtr, BINARY_TREE * data1NodePtr, BINARY_TREE * data2NodePtr)
 {
     if((rootPtr == NULL) || (rootPtr == data1NodePtr) || (rootPtr == data2NodePtr))
         return rootPtr;

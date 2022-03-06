@@ -5,6 +5,7 @@
 #include "../BinaryCommon.c"    // As Make File is not completed, need to add .c
                                 // Chnage it to .h once makefile is ready
 #include "Complete_BinaryTree.h"
+#include "./../PrintMyBinaryTree.c"
 
 /*
                  ______10______
@@ -42,6 +43,11 @@ int main (int argc, char ** argv)
 
     printf(" Total no of Node : [%d]\n", total_node_in_complete_binary_tree(rootPtr));
     printf(" Complete Binary Tree Size : [%d]\n", total_node_in_binary_tree(rootPtr));
+
+    print_my_binary_tree(rootPtr);
+
+    print_left_side_view_of_binary_tree(rootPtr);
+    print_right_side_view_of_binary_tree(rootPtr);
 
     if(is_tree_a_complete_tree(rootPtr))
         printf(" Given Binary Tree is Complete Binary Tree\n");
