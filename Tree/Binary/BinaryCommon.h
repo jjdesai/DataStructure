@@ -90,8 +90,8 @@
 
     void print_bottom_view_of_binary_tree      (BINARY_TREE * rootPtr);     // NOTE : Vertical Order Traversal will require 
     void print_top_view_of_binary_tree         (BINARY_TREE * rootPtr);     // NOTE : Vertical Order Traversal will require
-    void print_left_side_view_of_binary_tree   (BINARY_TREE * rootPtr);     // NOTE : Level Order Traversal will require
-    void print_right_side_view_of_binary_tree  (BINARY_TREE * rootPtr);     // NOTE : Level Order Traversal will require
+    void print_left_side_view_of_binary_tree   (BINARY_TREE * rootPtr);
+    void print_right_side_view_of_binary_tree  (BINARY_TREE * rootPtr);
 
     void print_all_node_at_level_in_binary_tree (BINARY_TREE * rootPtr, unsigned int level); // NOTE: Level Order Traversal will require
     int total_node_at_level_in_binary_tree      (BINARY_TREE * rootPtr, unsigned int level); // NOTE: Level Order Traversal will require

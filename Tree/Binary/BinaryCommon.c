@@ -346,6 +346,30 @@ unsigned int get_height_of_binary_tree (BINARY_TREE * rootPtr)
     }
 }
 
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : NONE
+    Description : This will print the bottom view of the binary tree pointed by rootPtr.
+    Parameter : rootPtr (In) : Head Pointer
+    Return :    void 
+*/
+void print_bottom_view_of_binary_tree (BINARY_TREE * rootPtr)
+{
+    // Vertical Order Traversal will require
+}
+
+/*
+    Author : Jay Desai      Tester : Jay Desai
+    Status : NONE
+    Description : This will print the top view of the binary tree pointed by rootPtr.
+    Parameter : rootPtr (In) : Head Pointer
+    Return :    void 
+*/
+void print_top_view_of_binary_tree (BINARY_TREE * rootPtr)
+{
+    // Vertical Order Traversal will require
+}
+
 static void print_left_side_view(BINARY_TREE * rootPtr, int currentLevel, unsigned int * maxLevelTravelPtr)
 {
     if(is_binary_tree_empty(rootPtr))
