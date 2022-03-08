@@ -5,6 +5,8 @@
 // Include header file of SingleLinkList
 #include "SingleLinkList.h"
 
+static SINGLE_LINK * create_new_node (int data);
+
 void main()
 {
     SINGLE_LINK * headPtr = NULL;
@@ -34,7 +36,7 @@ void main()
     print_single_link_list(headPtr);
 }
 
-SINGLE_LINK * create_new_node (int data)
+static SINGLE_LINK * create_new_node (int data)
 {
     SINGLE_LINK * newNodePtr = (SINGLE_LINK *) calloc(1, sizeof(SINGLE_LINK));
     if(newNodePtr)

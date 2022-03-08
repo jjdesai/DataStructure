@@ -19,8 +19,6 @@
 
     }QUEUE;
 
-    QUEUE * create_new_queue    (int data);
-
     bool insert_in_queue        (QUEUE ** headQueuePtr, int data);      // EnQueue
     int remove_from_queue       (QUEUE ** headQueuePtr);                // DeQueue
 

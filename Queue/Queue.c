@@ -4,12 +4,15 @@
 
 #include "Queue.h"
 
+static QUEUE * create_new_queue (int data);
+
 void main (void)
 {
 
 }
 
-QUEUE * create_new_queue (int data)
+
+static QUEUE * create_new_queue (int data)
 {
     QUEUE * newQueueNodePtr = calloc(1, sizeof(QUEUE));
     if(newQueueNodePtr)

@@ -27,8 +27,6 @@
 
     }ARRANGE_ORDER;
 
-    SINGLE_LINK * create_new_node       (int data);
-
     bool add_single_link_at_last        (SINGLE_LINK ** headPtr, int data);
     bool add_single_link_at_first       (SINGLE_LINK ** headPtr, int data);
     bool add_single_link_at_pos         (SINGLE_LINK ** headPtr, int data, unsigned int position);

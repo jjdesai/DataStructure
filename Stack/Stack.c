@@ -5,6 +5,8 @@
 // Include header file of SingleLinkList
 #include "Stack.h"
 
+static STACK * create_new_stack (int data);
+
 void main ()
 {
     STACK * head1StackPtr = NULL;
@@ -30,7 +32,7 @@ void main ()
 
 }
 
-STACK * create_new_stock (int data)
+static STACK * create_new_stack (int data)
 {
     STACK * newStackPtr = (STACK *) calloc (1, sizeof(STACK));
     if(newStackPtr)
@@ -67,7 +69,7 @@ bool push_in_stack (STACK ** stackHeadPtr, int data)
 {
     if(stackHeadPtr)
     {
-        STACK * newStackPtr = create_new_stock(data);
+        STACK * newStackPtr = create_new_stack(data);
         if(newStackPtr)
         {
             newStackPtr->next = (*stackHeadPtr);

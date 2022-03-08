@@ -4,6 +4,8 @@
 
 #include "QueueUsingStack.h"
 
+static QUEUE * create_queue (int data);
+
 void main (void)
 {
     QUEUE * queueHeadPtr = NULL;
@@ -22,7 +24,7 @@ void main (void)
     print_queue(queueHeadPtr);
 }
 
-QUEUE * create_queue (int data)
+static QUEUE * create_queue (int data)
 {
     QUEUE * newQueuePtr = calloc(1, sizeof(QUEUE));
     if(newQueuePtr)

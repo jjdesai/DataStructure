@@ -5,6 +5,7 @@
 #include "CircularLinkList.h"
 
 // TODO: Details missing for function
+static CIRCULAR_LINK * creat_circular_node (int data);
 
 int main(int agrc, char ** argv)
 {
@@ -38,7 +39,7 @@ int main(int agrc, char ** argv)
     return 1;
 }
 
-CIRCULAR_LINK * creat_circular_node (int data)
+static CIRCULAR_LINK * creat_circular_node (int data)
 {
     CIRCULAR_LINK * newCircularPtr = calloc(1, sizeof(CIRCULAR_LINK));
     if(newCircularPtr)

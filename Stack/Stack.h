@@ -20,8 +20,6 @@
 
     }STACK;
 
-    STACK * create_new_stock (int data);
-    
     bool is_stack_empty     (STACK * stackHeadPtr);
     unsigned int stack_size (STACK * stackHeadPtr);
     
