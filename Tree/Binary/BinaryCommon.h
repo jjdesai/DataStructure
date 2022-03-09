@@ -45,7 +45,7 @@
 
     }BINARY_TREE_TYPE;
 
-    typedef enum _types_of_sel_balancing_binary_search_tree
+    typedef enum _types_of_self_balancing_binary_search_tree
     {
         // https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree
 
