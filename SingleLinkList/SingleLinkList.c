@@ -162,7 +162,6 @@ bool add_single_link_at_pos (SINGLE_LINK ** headPtr, int data, unsigned int posi
     else {
         return FAIL;
     }
-
 }
 
 bool add_single_link_with_ascending (SINGLE_LINK ** heardPtr, int data)
