@@ -106,6 +106,7 @@ bool add_double_link_at_last (DOUBLE_LINK ** headPtr, int data)
     }
 }
 
+// Working
 bool add_double_link_at_pos (DOUBLE_LINK ** headPtr, int data, unsigned int position)
 {
     if(headPtr) {
@@ -157,12 +158,6 @@ bool add_double_link_at_pos (DOUBLE_LINK ** headPtr, int data, unsigned int posi
 }
 
 // Working
-bool is_double_link_empty (DOUBLE_LINK * headPtr)
-{
-    return (headPtr) ? NO : YES; 
-}
-
-// Working
 void print_double_link_list (DOUBLE_LINK * headPtr)
 {
     printf(" ---------\n");
@@ -203,4 +198,42 @@ bool delete_double_link_list (DOUBLE_LINK ** headPtr)
         printf(" HeadPtr is empty\n");
         return FAIL;
     }
+}
+
+// bool reverse_double_link (SINGLE_LINK ** headPtr)
+// {
+//     if(headPtr) {
+
+//         SINGLE_LINK * prevNodePtr = NULL, * currentNodePtr = (*headPtr), * tmpNextNodePtr = NULL;
+       
+//         while(currentNodePtr) {
+
+//             tmpNextNodePtr = currentNodePtr->next;
+//             currentNodePtr->next = prevNodePtr;
+//             prevNodePtr = currentNodePtr;
+//             currentNodePtr = tmpNextNodePtr;
+//         }
+//         (*headPtr) = prevNodePtr;
+//         return SUCCESS;
+//     }
+//     else {
+//         return FAIL;
+//     }
+// }
+
+// Working
+bool is_double_link_empty (DOUBLE_LINK * headPtr)
+{
+    return (headPtr) ? NO : YES; 
+}
+
+// Working
+unsigned int size_of_double_link (DOUBLE_LINK * headPtr)
+{
+    unsigned int count = 0;
+    while(headPtr) {
+        headPtr = headPtr->next;
+        count += 1;
+    }
+    return count;
 }
