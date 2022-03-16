@@ -34,6 +34,10 @@ void main()
 
     print_double_link_list(headPtr);
 
+    reverse_double_link(&headPtr);
+    printf(" After Reversing the Double Link List\n");
+    print_double_link_list(headPtr);
+
     delete_double_link_list(&headPtr);
 }
 
@@ -200,26 +204,28 @@ bool delete_double_link_list (DOUBLE_LINK ** headPtr)
     }
 }
 
-// bool reverse_double_link (SINGLE_LINK ** headPtr)
-// {
-//     if(headPtr) {
+// Working
+bool reverse_double_link (DOUBLE_LINK ** headPtr)
+{
+    if(headPtr) {
 
-//         SINGLE_LINK * prevNodePtr = NULL, * currentNodePtr = (*headPtr), * tmpNextNodePtr = NULL;
+        DOUBLE_LINK * prevNodePtr = NULL, * currentNodePtr = (*headPtr), * tmpNextNodePtr = NULL;
        
-//         while(currentNodePtr) {
+        while(currentNodePtr) {
 
-//             tmpNextNodePtr = currentNodePtr->next;
-//             currentNodePtr->next = prevNodePtr;
-//             prevNodePtr = currentNodePtr;
-//             currentNodePtr = tmpNextNodePtr;
-//         }
-//         (*headPtr) = prevNodePtr;
-//         return SUCCESS;
-//     }
-//     else {
-//         return FAIL;
-//     }
-// }
+            tmpNextNodePtr = currentNodePtr->next;
+            currentNodePtr->prev = tmpNextNodePtr;
+            currentNodePtr->next = prevNodePtr;
+            prevNodePtr = currentNodePtr;
+            currentNodePtr = tmpNextNodePtr;
+        }
+        (*headPtr) = prevNodePtr;
+        return SUCCESS;
+    }
+    else {
+        return FAIL;
+    }
+}
 
 // Working
 bool is_double_link_empty (DOUBLE_LINK * headPtr)
