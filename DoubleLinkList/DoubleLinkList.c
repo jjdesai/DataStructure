@@ -38,7 +38,8 @@ void main()
     printf(" After Reversing the Double Link List\n");
     print_double_link_list(headPtr);
 
-    delete_double_link_list(&headPtr);
+    // delete_double_link_list(&headPtr);
+    delete_double_link_list_r(&headPtr);
 }
 
 // Working
@@ -200,6 +201,20 @@ bool delete_double_link_list (DOUBLE_LINK ** headPtr)
     }
     else {
         printf(" HeadPtr is empty\n");
+        return FAIL;
+    }
+}
+
+bool delete_double_link_list_r (DOUBLE_LINK ** headPtr)    // _r Indicate recursion
+{
+    if(headPtr) {
+        while(*headPtr) {
+            delete_double_link_list_r(&(*headPtr)->next);
+            FREE_DOUBLE_LINK_NODE(*headPtr);
+        }
+        return SUCCESS;
+    }
+    else {
         return FAIL;
     }
 }
