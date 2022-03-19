@@ -242,6 +242,29 @@ bool reverse_double_link (DOUBLE_LINK ** headPtr)
     }
 }
 
+// Not Working
+DOUBLE_LINK * reverse_double_link_r (DOUBLE_LINK ** headPtr, DOUBLE_LINK * nodePtr)
+{
+    if(headPtr) {  
+        if(nodePtr == NULL) {
+            return NULL;
+        }
+        // To Assign headPtr with last node, as we're making it as first
+        if(nodePtr->next == NULL) {
+            (*headPtr) = nodePtr;
+            return nodePtr;
+        }
+        DOUBLE_LINK * nextNodePtr = reverse_double_link_r(headPtr, nodePtr->next);
+        nextNodePtr->next = nodePtr;
+        // To Assign NULL to first node's next, as we're making it as last
+        nodePtr->next = NULL;
+        return nodePtr;
+    }
+    else {
+        return NULL;
+    }
+}
+
 // Working
 bool is_double_link_empty (DOUBLE_LINK * headPtr)
 {
