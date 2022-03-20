@@ -242,7 +242,7 @@ bool reverse_double_link (DOUBLE_LINK ** headPtr)
     }
 }
 
-// Not Working
+// Not Workings
 DOUBLE_LINK * reverse_double_link_r (DOUBLE_LINK ** headPtr, DOUBLE_LINK * nodePtr)
 {
     if(headPtr) {  
@@ -280,4 +280,43 @@ unsigned int size_of_double_link (DOUBLE_LINK * headPtr)
         count += 1;
     }
     return count;
+}
+
+// Not Working
+DOUBLE_LINK * add_two_double_link (DOUBLE_LINK * headPtr1, DOUBLE_LINK * headPtr2)
+{
+    if(headPtr1 && headPtr2) {
+        DOUBLE_LINK * newLinkListHeadPtr = create_new_node(0);
+        DOUBLE_LINK * currentSinglePtr = newLinkListHeadPtr;
+        DOUBLE_LINK * newSinglePtr = NULL;
+        int data1, data2 = 0;
+        int carry = 0;
+        int sum = 0;
+
+        while(headPtr1 || headPtr2) {
+            sum =   ((headPtr1) ? headPtr1->data : 0) +
+                    ((headPtr2) ? headPtr2->data : 0) +
+                    carry;
+
+            newSinglePtr = create_new_node((sum%10));
+            currentSinglePtr->next = newSinglePtr;
+            currentSinglePtr = currentSinglePtr->next;
+
+            carry = (sum%10);
+
+            headPtr1 = ((headPtr1) ? (headPtr1->next) : NULL);
+            headPtr2 = ((headPtr2) ? (headPtr2->next) : NULL);
+        }
+        if(carry) {
+            currentSinglePtr->next = create_new_node(carry);
+        }
+
+        currentSinglePtr = newLinkListHeadPtr->next;
+        currentSinglePtr->prev = NULL;
+        FREE_SINGLE_LINK_NODE(newLinkListHeadPtr);
+        return currentSinglePtr;
+    }
+    else {
+        return NULL;
+    }
 }
